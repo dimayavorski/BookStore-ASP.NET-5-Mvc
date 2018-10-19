@@ -1,0 +1,47 @@
+﻿@model BookStore.WEB.Models.OrderViewModel
+@{
+    ViewBag.Title = "Оформление заказа";
+}
+
+<h3 class="text-center">Оформление заказа</h3>
+    @using (Html.BeginForm("MakeOrder","Checkout",null,FormMethod.Post,new {@class = "text-center m-auto" }))
+    {   @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            <label>Пользователь</label>
+            @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m=>m.UserName)
+        </div>
+        <div class="form-group">
+            <label>Имя</label>
+            @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.FirstName)
+        </div>
+        <div class="form-group">
+            <label>Фамилия</label>
+            @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.LastName)
+        </div>
+        <div class="form-group">
+            <label>Адресс</label>
+            @Html.EditorFor(m => m.Address, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Address)
+        </div>
+        <div class="form-group">
+            <label>Город</label>
+            @Html.EditorFor(m => m.City, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.City)
+        </div>
+        <div class="form-group">
+            <label>Телефон</label>
+            @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Phone)
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+        <input type="submit" value="Подтвердить" class="btn btn-primary"/>
+    }
+

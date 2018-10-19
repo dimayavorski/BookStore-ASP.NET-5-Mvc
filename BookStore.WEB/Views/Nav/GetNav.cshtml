@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BookStore.BLL.DTO.CategoryDTO>
+    
+<style>
+    .default {
+        position:fixed;
+        top:50%;
+      
+    }
+    .hidden {
+        display: none;
+    }
+   
+</style>
+    <ul class="nav flex-column nav-pills">
+        <li class="nav-item">
+            @Html.ActionLink("Главная", "Index", "Home",null,new {@class ="nav-link" })
+        </li>
+        <li class="nav-item">
+             <a class="nav-link">
+             Жанры
+            </a>
+
+            <ul>
+                @foreach (var link in Model)
+                {
+                    
+                        <li class="nav-item">
+                        @Html.RouteLink(link.CategoryName, new
+                   {
+                       controller = "Home",
+                       action = "Index",    
+                       category = link.CategoryName,
+                   }, new
+                       {
+                            @class = "nav-link " + (link.CategoryName == ViewBag.SelectedCategegory ? "active" : "")
+                       })
+                        </li>
+
+                    
+                }
+            </ul>
+        </li>
+    </ul>    
+<h4 class=" btn btn-success default hidden" id="success">Добавлено в корзину</h4>   
+
+
+
+

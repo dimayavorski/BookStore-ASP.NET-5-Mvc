@@ -1,0 +1,17 @@
+﻿@model PagedList.IPagedList<BookStore.BLL.DTO.BookDTO>
+@using PagedList.Mvc;
+
+@foreach (var book in Model)
+{
+    <div class="card mb-2">
+        <div class="card-body">
+            <h4 class="card-title">@book.Name</h4>
+            <h6 class="card-text">Жанр : @book.Category</h6>
+            <p class="card-text">@book.Description</p>
+            <h6 class="card-title">@book.Author</h6>
+            <h6 class="text-right">@book.Price.ToString("# руб")</h6>
+            @Ajax.ActionLink("Добавить в корзину", "AddToCart", "Home", new { id = book.Id, page = Model.PageNumber,category = ViewBag.Category },
+           new AjaxOptions { UpdateTargetId = "updateProducts",OnSuccess = "OnSuccess"}, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    </div>
+}

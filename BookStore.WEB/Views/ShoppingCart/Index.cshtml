@@ -1,0 +1,74 @@
+﻿@*@model BookStore.WEB.Models.ShoppingCartViewModel*@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ваша корзина</h2>
+
+<div id="updateCart">
+    @Html.Partial("ShowCart")
+</div>
+<a class="btn btn-primary btn-sm" href="@Model.returnUrl">Продолжить покупки</a>
+@Ajax.ActionLink("Очистить корзину", "EmptyCart", "ShoppingCart", null, new AjaxOptions
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "updateCart",
+    Confirm = "Вы хотите полностью очистить корзину?"
+}, new { @class = "btn btn-primary btn-sm" })
+@Html.ActionLink("Оформить заказ", "MakeOrder", "Checkout", null, new { @class = "btn btn-primary btn-sm" })
+@*@Html.Partial("MakeOrder")*@
+@*<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">Оформить заказ</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Оформление заказа</h5>
+                @Html.ValidationSummary()
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("MakeOrder","Checkout"))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Пользователь</label>
+                        @Html.Editor("UserName", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        <label>Имя</label>
+                        @Html.Editor("FirstName", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        <label>Фамилия</label>
+                        @Html.Editor("LastName", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        <label>Адресс</label>
+                        @Html.Editor("Address", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        <label>Город</label>
+                        @Html.Editor("City", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        @Html.Editor("Phone", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        @Html.Editor("Email", new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessage("Email")
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Подтвердить</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>*@

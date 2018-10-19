@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - BookStore</title>
+    @Styles.Render("~/Content/css")
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">*@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
+
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/NavStyles.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary navbar-expand-lg sticky-top">
+        <a href="#" class="navbar-brand">BookStore</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                @*<li class="nav-item active">
+                @Html.ActionLink("Корзина", "Index", "ShoppingCart", new { returnUrl = Request.Url.PathAndQuery }, new { @class = "nav-link" })
+            </li>*@
+
+            </ul>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" placeholder="Автор/Книга" />
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
+            </form>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Войти","Login","Account",null,new {@class = "btn-outline-light btn ml-1"})
+            }
+            else
+            {
+                @Html.ActionLink("Выйти","Logout","Account",null,new {@class = "btn-outline-light btn ml-1"})
+            }
+           
+            <a class="btn btn-outline-light mx-1" href="@Url.Action("Index","ShoppingCart",  new { returnUrl = Request.Url.PathAndQuery })">
+                    <i class="fas fa-shopping-cart mr-1"></i>Корзина
+                </a>
+            
+        </div>
+    </nav>
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                @Html.Action("GetNav", "Nav")
+        </div>
+        <div class="col-sm-10">@RenderBody()</div>
+    </div>
+    </section>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#success").removeClass("hidden");
+            $("#success").hide();
+        })
+        function OnSuccess() {
+            $('#success').show(1000, function () {
+                setTimeout(function () {
+                    $('#success').hide(500);
+                }, 1000);
+            });
+           
+        }
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
