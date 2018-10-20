@@ -18,7 +18,7 @@ namespace BookStore.DAL.EF
         //}
         public BookContext():base("BookContext")
         {
-            //Database.SetInitializer(new EfDbInitializer());
+           
             
 
 
