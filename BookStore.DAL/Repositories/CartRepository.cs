@@ -98,5 +98,16 @@ namespace BookStore.DAL.Repositories
             await Empty(CartId);
 
         }
+
+        public async Task MigrateCart(string userName,string CartId)
+        {
+            var cartItems = await db.CartItems.Where(c=>c.CartId == CartId).ToListAsync();
+            foreach (var item in cartItems)
+            {
+                item.CartId = userName;
+            }
+        }
+
+        
     }
 }

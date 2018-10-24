@@ -14,6 +14,8 @@ namespace BookStore.DAL.Interfaces
         void Remove(int id, string CartId);
         Task Empty(string CartId);
         Task CreateOrder(Order order, string CartId);
+        Task MigrateCart(string userName,string CartId);
+        
 
     }
 }

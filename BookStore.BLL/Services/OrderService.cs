@@ -115,6 +115,11 @@ namespace BookStore.BLL.Services
             await Database.Carts.Empty(CartId);
             await Database.SaveAsync();
         }
+        public async Task MigrateCart(string userName, string CartId)
+        {
+            await Database.Carts.MigrateCart(userName, CartId);
+            await Database.SaveAsync();
+        }
 
 
         // Orders logic
@@ -162,6 +167,7 @@ namespace BookStore.BLL.Services
             return false;
         }
 
+       
     }
     
 }

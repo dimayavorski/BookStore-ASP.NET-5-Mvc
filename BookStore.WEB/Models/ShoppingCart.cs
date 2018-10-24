@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.ApplicationInsights.Extensibility.Implementation;
 
 namespace BookStore.WEB.Models
 {
@@ -18,24 +19,27 @@ namespace BookStore.WEB.Models
        
         public string GetCardId(HttpContextBase context)
         {
-            //if (!string.IsNullOrWhiteSpace(context.User.Identity.Name))
-            //{
-            //    context.Session[CartSessionKey] = context.User.Identity.Name;
-            //}
-            //else
-            //{
-            //    Guid tempCardId = Guid.NewGuid();
-
-            //    context.Session[CartSessionKey] = tempCardId.ToString();
-            //}
-            //return context.Session[CartSessionKey].ToString();
-            var cartId = context.Session[CartSessionKey];
-            if (cartId == null)
+            if (!string.IsNullOrWhiteSpace(context.User.Identity.Name))
             {
-                cartId = Guid.NewGuid().ToString();
-                context.Session[CartSessionKey] = cartId;
+                context.Session[CartSessionKey] = context.User.Identity.Name;
             }
-            return cartId.ToString();
+            else
+            {
+                var cartId = context.Session[CartSessionKey];
+                if (cartId==null)
+                {
+                    cartId = Guid.NewGuid().ToString();
+                    context.Session[CartSessionKey] = cartId;
+                }
+            }
+            return context.Session[CartSessionKey].ToString();
+            //var cartId = context.Session[CartSessionKey];
+            //if (cartId == null)
+            //{
+            //    cartId = Guid.NewGuid().ToString();
+            //    context.Session[CartSessionKey] = cartId;
+            //}
+            //return cartId.ToString();
         }
         
     }

@@ -6,11 +6,37 @@
     <title>@ViewBag.Title - BookStore</title>
     @Styles.Render("~/Content/css")
     @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">*@
+    <link rel="stylesheet" href='@Url.Content("~/Content/themes/base/all.css")'/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 
+    <style>
+         
+       
+       
+        .ui-menu
+        {
+            display: block;
+            float: left;
+            list-style: none outside none;
+            margin: 0;
+            padding: 2px;
+            border-radius: 10px;
+        }
+        .ui-menu .ui-menu-item
+        {
+            clear: left;
+            float: left;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        
+        
 
+    </style>
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/NavStyles.css" rel="stylesheet" />
 </head>
@@ -19,23 +45,20 @@
         <a href="#" class="navbar-brand">BookStore</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                @*<li class="nav-item active">
-                @Html.ActionLink("Корзина", "Index", "ShoppingCart", new { returnUrl = Request.Url.PathAndQuery }, new { @class = "nav-link" })
-            </li>*@
-
             </ul>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" placeholder="Автор/Книга" />
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
-            </form>
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get, new {@class = "form-inline"}))
+            {
+                    <input class="form-control mr-sm-2" placeholder="Автор/Книга" data-autocomplete-source='@Url.Action("Autocomplete", "Home")' name="searchName" />
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
+            }
             @if (!User.Identity.IsAuthenticated)
             {
-                @Html.ActionLink("Войти","Login","Account",null,new {@class = "btn-outline-light btn ml-1"})
+                @Html.ActionLink("Войти", "Login", "Account", null, new { @class = "btn-outline-light btn ml-1" })
             }
             else
             {
-                @Html.ActionLink("Выйти","Logout","Account",null,new {@class = "btn-outline-light btn ml-1"})
-            }
+                @Html.ActionLink("Выйти", "Logout", "Account", null, new { @class = "btn-outline-light btn ml-1" })
+                }
            
             <a class="btn btn-outline-light mx-1" href="@Url.Action("Index","ShoppingCart",  new { returnUrl = Request.Url.PathAndQuery })">
                     <i class="fas fa-shopping-cart mr-1"></i>Корзина
@@ -55,6 +78,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src='@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")'></script>
     <script>
         $(document).ready(function () {
             $("#success").removeClass("hidden");
@@ -68,6 +92,13 @@
             });
            
         }
+        $(function () {
+            $("[data-autocomplete-source]").each(function () {
+                var target = $(this);
+                target.autocomplete({ source: target.attr("data-autocomplete-source") });
+                
+            });
+        });
     </script>
     @RenderSection("scripts", required: false)
 </body>

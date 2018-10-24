@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
 
 namespace BookStore.DAL.Interfaces
 {
@@ -7,7 +8,7 @@ namespace BookStore.DAL.Interfaces
     {
         IEnumerable<T> GetAll();
         T Get(int id);
-        IEnumerable<T> Find(Func<T, Boolean> predicate);
+        IEnumerable<T> Find(string searchString);
         void Create(T item);
         void Update(T item);
         void Delete(int Id);

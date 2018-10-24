@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookStore.BLL.DTO;
 
 namespace BookStore.BLL.Interfaces
 {
-    public interface IServiceCreator
+    public interface IBookService
     {
-        IUserService CreateUserService();
+        IEnumerable<BookDTO> FindBooks(string searchName);
     }
 }

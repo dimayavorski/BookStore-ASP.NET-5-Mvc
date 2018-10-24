@@ -12,6 +12,7 @@ using BookStore.BLL.Infrastructure;
 
 namespace BookStore.WEB.Controllers
 {
+    [Authorize]
     public class CheckoutController : Controller
     {
         // GET: Checkout

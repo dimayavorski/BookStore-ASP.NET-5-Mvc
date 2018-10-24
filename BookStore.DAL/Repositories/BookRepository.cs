@@ -36,6 +36,11 @@ namespace BookStore.DAL.Repositories
             return db.Books.Where(predicate).ToList();
         }
 
+        public IEnumerable<Book> Find(string searchString)
+        {
+            return db.Books.Where(b => b.Name.Contains(searchString)).ToList();
+        }
+
         public Book Get(int id)
         {
             return db.Books.Find(id);

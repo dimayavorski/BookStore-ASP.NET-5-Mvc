@@ -32,6 +32,11 @@ namespace BookStore.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Category> Find(string searchString)
+        {
+            throw new NotImplementedException();
+        }
+
         public Category Get(int id)
         {
             throw new NotImplementedException();

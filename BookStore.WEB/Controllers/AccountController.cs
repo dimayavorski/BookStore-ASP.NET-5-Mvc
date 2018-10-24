@@ -11,6 +11,9 @@ using BookStore.BLL.DTO;
 using BookStore.WEB.ViewModels;
 using BookStore.BLL.Infrastructure;
 using System.Threading.Tasks;
+using BookStore.BLL.Interface;
+using BookStore.BLL.Services;
+using BookStore.WEB.Models;
 
 namespace BookStore.WEB.Controllers
 {
@@ -18,10 +21,14 @@ namespace BookStore.WEB.Controllers
     {
         // GET: Account
         public IUserService UserService;
-
-        public AccountController(IUserService service)
+        public IOrderService OrderService;
+        private readonly ShoppingCartFactory shoppingCartFactory;
+        public const string CartSessionKey = "CartId";
+        public AccountController(IUserService userService,IOrderService orderService,ShoppingCartFactory factory)
         {
-            UserService = service;
+            UserService = userService;
+            OrderService = orderService;
+            shoppingCartFactory = factory;
         }
         //private IUserService UserService
         //{
@@ -61,6 +68,8 @@ namespace BookStore.WEB.Controllers
                     {
                         IsPersistent = true
                     },claim);
+                    var cartId = shoppingCartFactory.GetCart(this.HttpContext).ShoppingCartId;
+                    await MigrateShoppingCart(userDto.Email, cartId);
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -78,6 +87,11 @@ namespace BookStore.WEB.Controllers
             return View();
         }
 
+        public async Task MigrateShoppingCart(string userName,string CartId)
+        {
+            await OrderService.MigrateCart(userName, CartId);
+            Session[CartSessionKey] = userName;
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel viewModel)
@@ -93,9 +107,13 @@ namespace BookStore.WEB.Controllers
                     
                 };
                 OperationDetails operationDetails = await UserService.Create(user);
-                
+
                 if (operationDetails.Succedeed)
+                {
+                    var cartId = shoppingCartFactory.GetCart(this.HttpContext).ShoppingCartId;
+                    await MigrateShoppingCart(user.Email, cartId);
                     return View("SuccessRegister");
+                }
                 else
                     ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
             }
