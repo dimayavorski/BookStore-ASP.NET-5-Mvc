@@ -32,8 +32,14 @@
             padding: 0;
             width: 100%;
         }
-        
-        
+        .bookCard {
+            position: relative;
+            
+        }
+        .bigDescription
+        {
+            display: none;
+        }
         
 
     </style>
@@ -70,9 +76,9 @@
         <div class="row">
             <div class="col-sm-2">
                 @Html.Action("GetNav", "Nav")
-        </div>
-        <div class="col-sm-10">@RenderBody()</div>
-    </div>
+            </div>
+            <div class="col-sm-10">@RenderBody()</div>
+         </div>
     </section>
 
     @Scripts.Render("~/bundles/jquery")
@@ -98,6 +104,34 @@
                 target.autocomplete({ source: target.attr("data-autocomplete-source") });
                 
             });
+        });
+        //accordeon
+        $(document).ready(function () {
+            $(".bigDescription").removeClass("hidden")
+            
+            $(".bigDescription").hide();
+            $(".showDescription").click(function() {
+                var currentDesc = $(this).next(".bigDescription");
+                var currentSmDesc = $(this).prev(".smDescription");
+                $(".description .bigDescription").hide();
+                $(".description .showDescription").show();
+                $(this).next(".showDescription").hide();
+               
+                $(".description .smDescription").show();
+                currentSmDesc.hide();
+                currentDesc.show();
+                $(this).hide();
+
+                   
+                    
+                   
+            });
+            $(".hideDescription").click(function() {
+                
+                $(".bigDescription").hide();
+                $(".description .smDescription").show();
+                $(".description .showDescription").show();
+            })
         });
     </script>
     @RenderSection("scripts", required: false)

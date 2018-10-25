@@ -1,18 +1,25 @@
-﻿@model PagedList.IPagedList<BookStore.BLL.DTO.BookDTO>
+﻿@model PagedList.IPagedList<BookStore.WEB.Models.BookViewModel>
 @using PagedList.Mvc;
 
 @foreach (var book in Model)
 {
-    <div class="card mb-2">
+    <div class="card my-2 w-75">
+        <div class="card-header">
+            @book.Name
+        </div>
         <div class="card-body">
-            <h4 class="card-title">@book.Name</h4>
             <h6 class="card-text">Жанр : @book.Category</h6>
-            <p class="card-text">@book.Description</p>
-            <h6 class="card-title">@book.Author</h6>
-            <h6 class="text-right">@book.Price.ToString("# руб")</h6>
-            
-            @Ajax.ActionLink("Добавить в корзину", "Index", "Home", new {searchName = @ViewBag.searchName, id = book.Id, page = Model.PageNumber,category = ViewBag.Category },
-           new AjaxOptions { UpdateTargetId = "updateProducts",OnSuccess = "OnSuccess"}, new { @class = "btn btn-primary btn-sm" })
+            <h6 class="card-title">Автор : @book.Author</h6>
+            <div class="description">
+                <span class="smDescription">@book.SmallDescription</span>
+                <span class="showDescription dropdown-toggle text-muted"> Показать полностью</span>
+                <p class="card-text bigDescription hidden">@book.BigDescription  
+                    <span class="hideDescription btn-group dropup text-muted">Свернуть</span>
+                </p>
+            </div>
+            <h6 class="card-t">Цена : @book.Price.ToString("# руб")</h6>
+            @Ajax.ActionLink("Добавить в корзину", "Index", "Home", new {searchName = @ViewBag.searchName, id = book.Id, page = Model.PageNumber, category = ViewBag.Category},
+                new AjaxOptions {UpdateTargetId = "updateProducts", OnSuccess = "OnSuccess"}, new {@class = "btn btn-primary btn-sm"})
         </div>
     </div>
 }

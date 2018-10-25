@@ -10,8 +10,7 @@ namespace BookStore.BLL.Interface
 {
     public interface IOrderService
     {
-        BookDTO GetBook(int? id);
-        IEnumerable<BookDTO> GetBooks(string category);
+       
         IEnumerable<CategoryDTO> GetCategories();
 
 

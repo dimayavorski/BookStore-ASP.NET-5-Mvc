@@ -26,40 +26,47 @@ namespace BookStore.WEB.Controllers
         }
         public ActionResult Index(int? id,string category, int? page,string searchName)
         {
-            int pageSize = 3;
+            int pageSize = 6;
             int pageNumber = (page ?? 1);
             ViewBag.category = category;
             IEnumerable<BookDTO> books;
             ViewBag.searchName = searchName;
             if (searchName == null)
-                books = orderService.GetBooks(category);
+                books = bookService.GetBooks(category);
             else
                 books = bookService.FindBooks(searchName);
+            
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookViewModel>()
+                .ForMember(vM=>vM.SmallDescription,src=>src.MapFrom(b=>b.Description.Substring(0,30)))
+                .ForMember(vM=>vM.BigDescription,src=>src.MapFrom(b=>b.Description))).CreateMapper();
+            var booksViewModel = mapper.Map<IEnumerable<BookDTO>, List<BookViewModel>>(books);
+
+
             if (Request.IsAjaxRequest())
             {
                 var cart = shoppingCartFactory.GetCart(HttpContext);
-                var addedBook = orderService.GetBook(id.Value);
+                var addedBook = bookService.GetBook(id.Value);
                 orderService.AddToCart(addedBook, cart.ShoppingCartId);
                
 
-                return PartialView("BookSummary", books.ToPagedList(pageNumber, pageSize));
+                return PartialView("BookSummary", booksViewModel.ToPagedList(pageNumber, pageSize));
             }
             
-            return View(books.ToPagedList(pageNumber,pageSize));
+            return View(booksViewModel.ToPagedList(pageNumber,pageSize));
         }
         public async Task<ActionResult> AddToCart(int? id, int? page, string category)
         {
             var cart = shoppingCartFactory.GetCart(HttpContext);
-            var addedBook = orderService.GetBook(id.Value);
-            int pageSize = 3;
+            var addedBook = bookService.GetBook(id.Value);
+            int pageSize = 6;
             int pageNumber = (page ?? 1);
 
             await orderService.AddToCart(addedBook, cart.ShoppingCartId);
-            BookViewModel viewModel = new BookViewModel
-            {
-                Books = orderService.GetBooks(category)
-            };
-            var books = orderService.GetBooks(category);
+            //BookViewModel viewModel = new BookViewModel
+            //{
+            //    Books = bookService.GetBooks(category)
+            //};
+            var books = bookService.GetBooks(category);
 
             return PartialView("BookSummary", books.ToPagedList(pageNumber, pageSize));
         }
@@ -74,6 +81,8 @@ namespace BookStore.WEB.Controllers
                 return Json(books, JsonRequestBehavior.AllowGet);
             
         }
+
+        
 
     }
 }

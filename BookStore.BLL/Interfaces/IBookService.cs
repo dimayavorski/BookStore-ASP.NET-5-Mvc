@@ -10,5 +10,7 @@ namespace BookStore.BLL.Interfaces
     public interface IBookService
     {
         IEnumerable<BookDTO> FindBooks(string searchName);
+        BookDTO GetBook(int? id);
+        IEnumerable<BookDTO> GetBooks(string category);
     }
 }
