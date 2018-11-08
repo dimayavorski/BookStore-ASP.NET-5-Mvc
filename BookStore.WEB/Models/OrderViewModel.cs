@@ -9,9 +9,6 @@ namespace BookStore.WEB.Models
 {
     public class OrderViewModel
     {
-        public System.DateTime OrderDate { get; set; }
-        [Required]
-        public string UserName { get; set; }
         [Required(ErrorMessage = "First Name is required")]
         [DisplayName("First Name")]
         [StringLength(160)]

@@ -36,6 +36,7 @@ namespace BookStore.WEB.Controllers
             if (ModelState.IsValid)
             { 
                     TryUpdateModel(order);
+                    order.UserName = User.Identity.Name;
                     order.OrderDate = DateTime.Now;
                     var cart = shoppingCartFactory.GetCart(this.HttpContext);
                     await orderSerivce.CreateNewOrder(order, cart.ShoppingCartId);

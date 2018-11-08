@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\AuthorDTO.cs" />
     <Compile Include="DTO\BookDTO.cs" />
     <Compile Include="DTO\CartItemDTO.cs" />
     <Compile Include="DTO\CategoryDTO.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Infrastructure\OperationDetails.cs" />
     <Compile Include="Infrastructure\ValidationException.cs" />
+    <Compile Include="Interfaces\IAuthorService.cs" />
     <Compile Include="Interfaces\IBookService.cs" />
     <Compile Include="Interfaces\IOrderService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />

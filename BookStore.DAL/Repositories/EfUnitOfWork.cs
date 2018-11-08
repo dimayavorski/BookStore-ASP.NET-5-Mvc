@@ -19,7 +19,7 @@ namespace BookStore.DAL.Repositories
         private CartRepository cartRepository;
         private ApplicationUserManager userManager;
         private ApplicationRoleManager roleManager;
-      
+        private AuthorRepository authorRepository;
 
         public EfUnitOfWork()
         {
@@ -32,7 +32,15 @@ namespace BookStore.DAL.Repositories
             get { return userManager; }
         }
 
-       
+        public AuthorRepository AuthorRepository
+         {
+            get
+            {
+            if(authorRepository==null)
+                authorRepository = new AuthorRepository(db);
+                return authorRepository;
+            }
+        }
 
         public ApplicationRoleManager RoleManager
         {

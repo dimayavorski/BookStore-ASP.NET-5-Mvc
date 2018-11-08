@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BookStore.BLL.DTO.BookDTO>
+    <table class="table table-responsive">
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Name</td>
+                    @*<td>
+                        <a href="@Url.Action("Edit", "Home", new { id = item.Id })" class = "editDialog"><i class="fa
+fa-pencil-square-o"></i>&nbsp;Edit</a>
+                    </td>*@
+                    @*<td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Редактировать</button>
+                    </td>*@
+                    <td>
+                        <a href="@Url.Action("Edit",new {id = book.Id})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Редактировать</a>
+                    </td>
+                    <td>@Ajax.ActionLink("Удалить", "Admin", "Delete", new { id = book.Id }, new AjaxOptions())</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+

@@ -64,15 +64,19 @@
             else
             {
                 @Html.ActionLink("Выйти", "Logout", "Account", null, new { @class = "btn-outline-light btn ml-1" })
-                }
-           
+            }
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Админ панель","Main","Admin",null,new {@class = "btn btn-outline-light ml-1"})
+            }
+
             <a class="btn btn-outline-light mx-1" href="@Url.Action("Index","ShoppingCart",  new { returnUrl = Request.Url.PathAndQuery })">
                     <i class="fas fa-shopping-cart mr-1"></i>Корзина
                 </a>
             
         </div>
     </nav>
-    <section class="container-fluid">
+    <section class="container-fluid mt-2">
         <div class="row">
             <div class="col-sm-2">
                 @Html.Action("GetNav", "Nav")
