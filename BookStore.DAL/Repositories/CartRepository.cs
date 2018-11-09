@@ -107,7 +107,5 @@ namespace BookStore.DAL.Repositories
                 item.CartId = userName;
             }
         }
-
-        
     }
 }

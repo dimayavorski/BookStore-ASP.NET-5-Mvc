@@ -14,12 +14,12 @@ namespace BookStore.DAL.Repositories
     public class EfUnitOfWork : IUnitOfWork
     {
         private BookContext db;
-        private BookRepository bookRepository;
-        private CategoryRepository categoryRepository;
-        private CartRepository cartRepository;
+        private IBookRepository _bookRepository;
+        private ICategoryRepository _categoryRepository;
+        private ICartRepository _cartRepository;
         private ApplicationUserManager userManager;
         private ApplicationRoleManager roleManager;
-        private AuthorRepository authorRepository;
+        private IAuthorRepository _authorRepository;
 
         public EfUnitOfWork()
         {
@@ -32,13 +32,13 @@ namespace BookStore.DAL.Repositories
             get { return userManager; }
         }
 
-        public AuthorRepository AuthorRepository
+        public IAuthorRepository Authors
          {
             get
             {
-            if(authorRepository==null)
-                authorRepository = new AuthorRepository(db);
-                return authorRepository;
+            if(_authorRepository==null)
+                _authorRepository = new AuthorRepository(db);
+                return _authorRepository;
             }
         }
 
@@ -46,31 +46,31 @@ namespace BookStore.DAL.Repositories
         {
             get { return roleManager; }
         }
-        public IRepository<Book> Books
+        public IBookRepository Books
         {
             get
             {
-                if (bookRepository == null)
-                    bookRepository = new BookRepository(db);
-                return bookRepository;
+                if (_bookRepository == null)
+                    _bookRepository = new BookRepository(db);
+                return _bookRepository;
             }
         }
 
-        public IRepository<Category> Categories
+        public ICategoryRepository Categories
         {
             get
             {
-                if (categoryRepository == null)
-                    categoryRepository = new CategoryRepository(db);
-                return categoryRepository;
+                if (_categoryRepository == null)
+                    _categoryRepository = new CategoryRepository(db);
+                return _categoryRepository;
             }
         }
 
         public ICartRepository Carts
         {
-            get { if (cartRepository == null)
-                    cartRepository = new CartRepository(db);
-                return cartRepository;
+            get { if (_cartRepository == null)
+                    _cartRepository = new CartRepository(db);
+                return _cartRepository;
             }
         }
 

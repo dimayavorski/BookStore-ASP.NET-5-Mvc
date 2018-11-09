@@ -20,7 +20,8 @@
             <p class="card-text">@book.BigDescription</p>  
 
             <h6 class="card-t">Цена : @book.Price.ToString("# руб")</h6>
-            @Ajax.ActionLink("Добавить в корзину", "Index", "Home", new {searchName = @ViewBag.searchName, id = book.Id, page = Model.PageNumber, category = ViewBag.Category},
+            @Ajax.ActionLink("Добавить в корзину", "Index", "Home", new {searchName = @ViewBag.searchName, id = book.Id,
+                page = Model.PageNumber,author = ViewBag.Author, category = ViewBag.Category},
                 new AjaxOptions {UpdateTargetId = "updateProducts", OnSuccess = "OnSuccess"}, new {@class = "btn btn-primary btn-sm"})
         </div>
     </div>

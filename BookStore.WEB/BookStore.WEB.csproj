@@ -222,9 +222,10 @@
     <Compile Include="Models\ShoppingCartFactory.cs" />
     <Compile Include="Models\ShoppingCartRemoveViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\OrderModule.cs" />
+    <Compile Include="Util\DependencyNinjectModule.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

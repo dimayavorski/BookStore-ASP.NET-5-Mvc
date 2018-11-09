@@ -6,11 +6,12 @@ using Ninject.Modules;
 
 namespace BookStore.WEB.Util
 {
-    public class OrderModule : NinjectModule
+    public class DependencyNinjectModule : NinjectModule
     {
         public override void Load()
         {
             Bind<IOrderService>().To<OrderService>();
+            Bind<IAuthorService>().To<AuthorService>();
             Bind<IUserService>().To<UserService>();
             Bind<IBookService>().To<BookService>();
             Kernel.Unbind<ModelValidatorProvider>();

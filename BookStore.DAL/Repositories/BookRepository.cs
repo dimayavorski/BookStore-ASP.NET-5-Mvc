@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.DAL.Repositories
 {
-    public class BookRepository : IRepository<Book>
+    public class BookRepository : IBookRepository
     {
         private BookContext db;
         public BookRepository(BookContext context)
@@ -31,11 +31,6 @@ namespace BookStore.DAL.Repositories
             }
         }
 
-        public IEnumerable<Book> Find(Func<Book, bool> predicate)
-        {
-            return db.Books.Where(predicate).ToList();
-        }
-
         public IEnumerable<Book> Find(string searchString)
         {
             return db.Books.Where(b => b.Name.Contains(searchString)).Include(b => b.Author).Include(b => b.Category).ToList();
@@ -54,12 +49,6 @@ namespace BookStore.DAL.Repositories
         public void Update(Book item)
         {
             db.Entry(item).State = EntityState.Modified;
-        }
-
-        //public IEnumerable<Book> GetBooksByCategory(string category)
-        //{
-        //    return db.Books.Where(string)
-        //}
-        
+        }        
     }
 }

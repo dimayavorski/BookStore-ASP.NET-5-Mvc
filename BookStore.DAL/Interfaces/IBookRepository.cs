@@ -7,8 +7,8 @@ using BookStore.DAL.Entities;
 
 namespace BookStore.DAL.Interfaces
 {
-    public interface IAuthorRepository : IRepository<Author>
+    public interface IBookRepository : IRepository<Book>
     {
-       
+        IEnumerable<Book> Find(string searchString);
     }
 }

@@ -24,15 +24,16 @@ namespace BookStore.WEB.Controllers
             shoppingCartFactory = factory;
             bookService = bService;
         }
-        public ActionResult Index(int? id,string category, int? page,string searchName)
+        public ActionResult Index(int? id,string category, int? page,string searchName,string author)
         {
             int pageSize = 6;
             int pageNumber = (page ?? 1);
             ViewBag.category = category;
-            IEnumerable<BookDTO> books;
             ViewBag.searchName = searchName;
+            ViewBag.author = author;
+            IEnumerable<BookDTO> books;
             if (searchName == null)
-                books = bookService.GetBooks(category);
+                books = bookService.GetBooks(category,author);
             else
                 books = bookService.FindBooks(searchName);
             
@@ -54,7 +55,7 @@ namespace BookStore.WEB.Controllers
             
             return View(booksViewModel.ToPagedList(pageNumber,pageSize));
         }
-        public async Task<ActionResult> AddToCart(int? id, int? page, string category)
+        public async Task<ActionResult> AddToCart(int? id, int? page, string category,string author)
         {
             var cart = shoppingCartFactory.GetCart(HttpContext);
             var addedBook = bookService.GetBook(id.Value);
@@ -62,24 +63,16 @@ namespace BookStore.WEB.Controllers
             int pageNumber = (page ?? 1);
 
             await orderService.AddToCart(addedBook, cart.ShoppingCartId);
-            //BookViewModel viewModel = new BookViewModel
-            //{
-            //    Books = bookService.GetBooks(category)
-            //};
-            var books = bookService.GetBooks(category);
+            
+            var books = bookService.GetBooks(category,author);
 
             return PartialView("BookSummary", books.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Autocomplete(string term)
         { 
-                //var books = Boo.Where(a => a.Model.Contains(term))
-                //    .Select(a => new { value = a.Model })
-                //    .Distinct();
-            var books = bookService.FindBooks(term).Select(b => new {value = b.Name}).Distinct();
-
+                var books = bookService.FindBooks(term).Select(b => new {value = b.Name}).Distinct();
                 return Json(books, JsonRequestBehavior.AllowGet);
-            
         }
 
         

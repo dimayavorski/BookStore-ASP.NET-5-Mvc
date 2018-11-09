@@ -11,6 +11,6 @@ namespace BookStore.BLL.Interfaces
     {
         IEnumerable<BookDTO> FindBooks(string searchName);
         BookDTO GetBook(int? id);
-        IEnumerable<BookDTO> GetBooks(string category);
+        IEnumerable<BookDTO> GetBooks(string category,string author);
     }
 }

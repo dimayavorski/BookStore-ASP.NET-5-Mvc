@@ -20,7 +20,7 @@ namespace BookStore.WEB
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //Ninject
             ServiceModule serviceModule = new ServiceModule();
-            OrderModule orderModule = new OrderModule();
+            DependencyNinjectModule orderModule = new DependencyNinjectModule();
             var kernel = new StandardKernel(serviceModule, orderModule);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }

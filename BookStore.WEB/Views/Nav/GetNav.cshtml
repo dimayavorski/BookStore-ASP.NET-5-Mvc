@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStore.BLL.DTO.CategoryDTO>
+﻿@model BookStore.WEB.ViewModels.MenuViewModel
     
 <style>
     .default {
@@ -16,27 +16,46 @@
             @Html.ActionLink("Главная", "Index", "Home",null,new {@class ="nav-link" })
         </li>
         <li class="nav-item">
-             <a class="nav-link">
-             Жанры
+            <a class="nav-link">
+                Жанры
             </a>
 
             <ul>
-                @foreach (var link in Model)
+                @foreach (var link in Model.Categories)
                 {
                     
-                        <li class="nav-item">
+                    <li class="nav-item">
                         @Html.RouteLink(link.CategoryName, new
-                   {
-                       controller = "Home",
-                       action = "Index",    
-                       category = link.CategoryName,
-                   }, new
-                       {
+                        {
+                            controller = "Home",
+                            action = "Index",    
+                            category = link.CategoryName,
+                        }, new
+                        {
                             @class = "nav-link " + (link.CategoryName == ViewBag.SelectedCategegory ? "active" : "")
-                       })
-                        </li>
+                        })
+                    </li>
 
                     
+                }
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link">Авторы</a>
+            <ul>
+                @foreach (var link in Model.Authors)
+                {
+                    <li class="nav-item">
+                        @Html.RouteLink(link.Name, new
+                        {
+                            controller = "Home",
+                            action = "Index",
+                            author = link.Name,
+                        }, new
+                        {
+                            @class = "nav-link " + (link.Name == ViewBag.SelectedAuthor ? "active" : "")
+                        })
+                    </li>
                 }
             </ul>
         </li>

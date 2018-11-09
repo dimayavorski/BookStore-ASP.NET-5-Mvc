@@ -10,7 +10,7 @@ using BookStore.DAL.EF;
 
 namespace BookStore.DAL.Repositories
 {
-    public class CategoryRepository : IRepository<Category>
+    public class CategoryRepository : ICategoryRepository
     {
         private BookContext db;
         public CategoryRepository(BookContext context)
@@ -23,16 +23,6 @@ namespace BookStore.DAL.Repositories
         }
 
         public void Delete(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Category> Find(Func<Category, bool> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Category> Find(string searchString)
         {
             throw new NotImplementedException();
         }

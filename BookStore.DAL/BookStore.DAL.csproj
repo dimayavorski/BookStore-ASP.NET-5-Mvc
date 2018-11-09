@@ -67,7 +67,9 @@
     <Compile Include="Identity\ApplicationRoleManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Interfaces\IAuthorRepository.cs" />
+    <Compile Include="Interfaces\IBookRepository.cs" />
     <Compile Include="Interfaces\ICartRepository.cs" />
+    <Compile Include="Interfaces\ICategoryRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Migrations\201809110748349_FirstInitialize.cs" />

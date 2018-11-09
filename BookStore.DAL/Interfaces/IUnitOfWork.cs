@@ -9,9 +9,10 @@ namespace BookStore.DAL.Interfaces
     {
         ApplicationUserManager UserManager { get; }
         ApplicationRoleManager RoleManager { get; }
-        IRepository<Book> Books { get; }
-        IRepository<Category> Categories { get; }
+        IBookRepository Books { get; }
+        ICategoryRepository Categories { get; }
         ICartRepository Carts { get; }
+        IAuthorRepository Authors { get; }
         void Save();
         Task SaveAsync();
     }
