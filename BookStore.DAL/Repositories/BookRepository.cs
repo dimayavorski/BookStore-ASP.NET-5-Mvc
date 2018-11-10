@@ -22,13 +22,15 @@ namespace BookStore.DAL.Repositories
             db.Books.Add(item);
         }
 
-        public void Delete(int Id)
+        public int Delete(int Id)
         {
             Book book = db.Books.Find(Id);
             if (book != null)
             {
                 db.Books.Remove(book);
             }
+
+            return book.Id;
         }
 
         public IEnumerable<Book> Find(string searchString)
@@ -38,7 +40,7 @@ namespace BookStore.DAL.Repositories
 
         public Book Get(int id)
         {
-            return db.Books.Find(id);
+            return db.Books.Where(b=>b.Id==id).Include(b=>b.Author).Include(b=>b.Category).FirstOrDefault();
         }
 
         public IEnumerable<Book> GetAll()
@@ -48,7 +50,15 @@ namespace BookStore.DAL.Repositories
 
         public void Update(Book item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            Book updatedBook = db.Books.Where(b => b.Id == item.Id).FirstOrDefault();
+            if (updatedBook != null)
+            {
+                updatedBook.Name = item.Name;
+                updatedBook.Price = item.Price;
+                updatedBook.Description = item.Description;
+
+            }
+            db.Entry(updatedBook).State = EntityState.Modified;
         }        
     }
 }

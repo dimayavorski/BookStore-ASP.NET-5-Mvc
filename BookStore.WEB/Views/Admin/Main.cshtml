@@ -1,48 +1,59 @@
 ﻿@{
-    ViewBag.Title = "Main";
+    ViewBag.Title = "Админ панель";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-    
-@Html.ActionLink("Добавить книгу","Add",null,new {@class ="btn btn-primary mb-2"})
-<div id="updateBooks">
-    @Html.Partial("ShowBooks");
-</div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+@Html.ActionLink("Добавить книгу", "Add", null, new { @class = "btn btn-primary mb-2" })
+
+<table class="table table-bordered table-hover">
+    <tbody class="tbody"></tbody>
+</table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role ="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Редактирование книги</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Редактирование</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                @using (Ajax.BeginForm("Edit",new AjaxOptions()
-                {
-                    UpdateTargetId = "updateBooks"
-                }))
-                {
+                <form>
+                   
+                    <input type="hidden" id="Id" />
                     <div class="form-group">
-                        <label  class="col-form-label"></label>
-                            
+                        <label for="Name">Название</label>
+                        <input type="text" class="form-control" id="Name" placeholder="Name"/>
+                        
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
+                        <label for="Decription">Описание</label>
+                        <textarea id="Decription" class="form-control" rows="6"></textarea>
+                        
                     </div>
-                }
+                    <div class="form-group">
+                        <label for="Price">Цена</label>
+                        <input type="text" class="form-control" id="Price" placeholder="Цена"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Author">Автор</label>
+                        <input type="text" class="form-control" id="Author" placeholder="Автор"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Category">Жанр</label>
+                        <input type="text" class="form-control" id="Category" placeholder="Жанр"/>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
+                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Add</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Обновить</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
             </div>
         </div>
     </div>
 </div>
-
-
-
 

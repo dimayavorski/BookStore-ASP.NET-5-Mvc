@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - BookStore</title>
     @Styles.Render("~/Content/css")
-    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">*@
+   
     <link rel="stylesheet" href='@Url.Content("~/Content/themes/base/all.css")'/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">*@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 
     <style>
-         
-       
+
+
        
         .ui-menu
         {
@@ -49,6 +49,9 @@
 <body>
     <nav class="navbar navbar-dark bg-primary navbar-expand-lg sticky-top">
         <a href="#" class="navbar-brand">BookStore</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
             </ul>
@@ -89,55 +92,205 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src='@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")'></script>
-    <script>
-        $(document).ready(function () {
-            $("#success").removeClass("hidden");
-            $("#success").hide();
-        })
-        function OnSuccess() {
-            $('#success').show(1000, function () {
-                setTimeout(function () {
-                    $('#success').hide(500);
-                }, 1000);
-            });
-           
-        }
-        $(function () {
-            $("[data-autocomplete-source]").each(function () {
-                var target = $(this);
-                target.autocomplete({ source: target.attr("data-autocomplete-source") });
-                
-            });
+<script>
+    $(document).ready(function () {
+        $("#success").removeClass("hidden");
+        $("#success").hide();
+    })
+    function OnSuccess() {
+        $('#success').show(1000, function () {
+            setTimeout(function () {
+                $('#success').hide(500);
+            }, 1000);
         });
-        //accordeon
-        $(document).ready(function () {
-            $(".bigDescription").removeClass("hidden")
+           
+    }
+    $(function () {
+        $("[data-autocomplete-source]").each(function () {
+            var target = $(this);
+            target.autocomplete({ source: target.attr("data-autocomplete-source") });
+                
+        });
+    });
+    //accordeon
+    $(document).ready(function () {
+        $(".bigDescription").removeClass("hidden")
             
-            $(".bigDescription").hide();
-            $(".showDescription").click(function() {
-                var currentDesc = $(this).next(".bigDescription");
-                var currentSmDesc = $(this).prev(".smDescription");
-                $(".description .bigDescription").hide();
-                $(".description .showDescription").show();
-                $(this).next(".showDescription").hide();
+        $(".bigDescription").hide();
+        $(".showDescription").click(function() {
+            var currentDesc = $(this).next(".bigDescription");
+            var currentSmDesc = $(this).prev(".smDescription");
+            $(".description .bigDescription").hide();
+            $(".description .showDescription").show();
+            $(this).next(".showDescription").hide();
                
-                $(".description .smDescription").show();
-                currentSmDesc.hide();
-                currentDesc.show();
-                $(this).hide();
+            $(".description .smDescription").show();
+            currentSmDesc.hide();
+            currentDesc.show();
+            $(this).hide();
 
                    
                     
                    
-            });
-            $(".hideDescription").click(function() {
-                
-                $(".bigDescription").hide();
-                $(".description .smDescription").show();
-                $(".description .showDescription").show();
-            })
         });
-    </script>
+        $(".hideDescription").click(function() {
+                
+            $(".bigDescription").hide();
+            $(".description .smDescription").show();
+            $(".description .showDescription").show();
+        })
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        loadData();
+    });
+
+    //Load Data function
+    function Update() {
+        var res = validate();
+        if (res == false) {
+            return false;
+        }
+        var bookObj = {
+            Id: $("#Id").val(),
+            Name: $("#Name").val(),
+            Price: $("#Price").val(),
+            Description: $("#Decription").val(),
+        };
+        $.ajax({
+            url: "/Admin/Update",
+            data: JSON.stringify(bookObj),
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                loadData();
+                $('#myModal').modal('hide');
+                $('#Name').val("");
+                $('#Price').val("");
+                $('#Decription').val("");
+               
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+        
+    }
+    function loadData() {
+        $.ajax({
+            url: "/Admin/ListAllBooks",
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                $.each(result, function (key, item) {
+                    html += '<tr>';
+                    html += '<td>' +item.Id + '</td>'
+                    html += '<td>' + item.Name + '</td>'
+                    html += '<td>' + item.Price + ' руб' + '</td>'
+                    html += '<td>' + item.Author + '</td>'
+                    html += '<td>' + item.Category + '</td>'
+                    html += '<td> <a href="#" onclick="return getbyId(' + item.Id + ')">Обновить</a></td>'
+                    html += '<td> <a href="#" onclick ="Delete(' + item.Id + ')">Удалить</a></td>';
+                    html += '</tr>';
+                });
+                $('.tbody').html(html);
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+    function Delete(id) {
+        var confirmation = confirm("Вы уверены что хотите удалить эту запись");
+        if (confirmation) {
+            $.ajax({
+                url: '/Admin/Delete/' +id,
+                type: 'POST',
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function(result) {
+                    loadData();
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+    }
+    function validate() {
+        var isValid = true;
+        if ($('#Name').val().trim() == "") {
+            $('#Name').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Name').css('border-color', 'lightgrey');
+        }
+        if ($('#Price').val().trim() == "") {
+            $('#Price').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Price').css('border-color', 'lightgrey');
+        }
+        if ($('#Decription').val().trim() == "") {
+            $('#Decription').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Decription').css('border-color', 'lightgrey');
+        }
+        if ($('#Author').val().trim() == "") {
+            $('#Author').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Author').css('border-color', 'lightgrey');
+        }
+        if ($("#Category").val().trim() == "") {
+            $("#Category").css('border-color', 'Red');
+            isValid = false;
+        } else {
+            $("#Category").css('border-color',"lightgrey")
+        }
+        return isValid;
+    }
+    function getbyId(Id) {
+      
+        $('#Name').css('border-color', 'lightgrey');
+        $('#Price').css('border-color', 'lightgrey');
+        $('#Decription').css('border-color', 'lightgrey');
+        $('#Author').css('border-color', 'lightgrey');
+        $('#Category').css('border-color', 'lightgrey');
+        $.ajax({
+            url: '/Admin/GetById/' + Id,
+            type: 'GET',
+            contentType: 'application/json;charset=UTF-8',
+            dataType: 'json',
+            success: function (result) {
+                $('#Id').val(result.Id);
+                $('#Name').val(result.Name);
+                $('#Price').val(result.Price);
+                $('#Decription').val(result.Description);
+                $('#Author').val(result.Author);
+                $('#Category').val(result.Category);
+
+                $('#myModal').modal('show');
+                $('#btnUpdate').show();
+                $('#btnAdd').hide();
+            },
+            error: function(errorMessage) {
+                alert(errorMessage.responseText);
+            }
+        });
+        return false;
+    }
+    
+</script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

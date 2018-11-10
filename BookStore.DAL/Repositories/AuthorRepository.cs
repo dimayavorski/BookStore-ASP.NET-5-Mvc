@@ -22,7 +22,7 @@ namespace BookStore.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public void Delete(int Id)
+        public int Delete(int Id)
         {
             throw new NotImplementedException();
         }

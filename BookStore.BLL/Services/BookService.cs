@@ -33,7 +33,9 @@ namespace BookStore.BLL.Services
             var book = database.Books.Get(id.Value);
             if (book == null)
                 throw new ValidationException("Книга не найдена", "");
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>().ForMember(dto => dto.Author,
+                src => src.MapFrom(b => b.Author.Name)).ForMember(dto => dto.Category,
+                src => src.MapFrom(b => b.Category.CategoryName))).CreateMapper();
             return mapper.Map<Book, BookDTO>(database.Books.Get(id.Value));
 
         }
@@ -55,6 +57,27 @@ namespace BookStore.BLL.Services
                 src => src.MapFrom(b => b.Author.Name)).ForMember(dto => dto.Category,
                 src => src.MapFrom(b => b.Category.CategoryName))).CreateMapper();
             return mapper.Map<IEnumerable<Book>, List<BookDTO>>(books);
+        }
+
+        public int DeleteBook(int id)
+        {
+            int result = database.Books.Delete(id);
+            database.Save();
+            return result;
+
+        }
+
+        public void Update(BookDTO book)
+        {
+            Book item = new Book
+            {
+                Id = book.Id,
+                Name = book.Name,
+                Price = book.Price,
+                Description = book.Description
+            };
+            database.Books.Update(item);
+            database.Save();
         }
     }
 }

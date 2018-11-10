@@ -28,10 +28,12 @@ namespace BookStore.WEB.Controllers
         {
             int pageSize = 6;
             int pageNumber = (page ?? 1);
+            IEnumerable<BookDTO> books;
+
             ViewBag.category = category;
             ViewBag.searchName = searchName;
             ViewBag.author = author;
-            IEnumerable<BookDTO> books;
+
             if (searchName == null)
                 books = bookService.GetBooks(category,author);
             else
