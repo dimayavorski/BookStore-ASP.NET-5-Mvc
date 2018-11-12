@@ -12,6 +12,7 @@ namespace BookStore.WEB.Util
         {
             Bind<IOrderService>().To<OrderService>();
             Bind<IAuthorService>().To<AuthorService>();
+            Bind<ICategoryService>().To<CategoryService>();
             Bind<IUserService>().To<UserService>();
             Bind<IBookService>().To<BookService>();
             Kernel.Unbind<ModelValidatorProvider>();

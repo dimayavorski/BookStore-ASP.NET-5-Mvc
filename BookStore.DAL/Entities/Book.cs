@@ -1,4 +1,6 @@
-﻿namespace BookStore.DAL.Entities
+﻿
+
+namespace BookStore.DAL.Entities
 {
     public class Book
     {

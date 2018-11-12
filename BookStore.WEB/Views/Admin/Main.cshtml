@@ -5,51 +5,53 @@
 
 
 
-@Html.ActionLink("Добавить книгу", "Add", null, new { @class = "btn btn-primary mb-2" })
+<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#myModal" 
+        onclick="clearTextBox()">Добавить книгу</button>
 
 <table class="table table-bordered table-hover">
     <tbody class="tbody"></tbody>
 </table>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role ="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Редактирование</h5>
+                <h5 class="modal-title" id="EditingLabel">Редактирование</h5>
+                <h5 class="modal-title" id="AddingLabel">Добавление</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form>
-                   
+
                     <input type="hidden" id="Id" />
                     <div class="form-group">
                         <label for="Name">Название</label>
-                        <input type="text" class="form-control" id="Name" placeholder="Name"/>
-                        
+                        <input type="text" class="form-control" id="Name" />
+
                     </div>
                     <div class="form-group">
                         <label for="Decription">Описание</label>
                         <textarea id="Decription" class="form-control" rows="6"></textarea>
-                        
+
                     </div>
                     <div class="form-group">
                         <label for="Price">Цена</label>
-                        <input type="text" class="form-control" id="Price" placeholder="Цена"/>
+                        <input type="text" class="form-control" id="Price" placeholder="Например : 3000 руб"/>
                     </div>
                     <div class="form-group">
                         <label for="Author">Автор</label>
-                        <input type="text" class="form-control" id="Author" placeholder="Автор"/>
+                        @Html.DropDownList("Author",ViewBag.authors as SelectList,new {id = "Author",@class = "form-control"})
                     </div>
                     <div class="form-group">
                         <label for="Category">Жанр</label>
-                        <input type="text" class="form-control" id="Category" placeholder="Жанр"/>
+                        @Html.DropDownList("Category", ViewBag.categories as SelectList, new { id = "Category", @class = "form-control" })
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Add</button>
+                <button type="button" class="btn btn-primary" id="btnAdd" onclick="Add();">Добавить</button>
                 <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Обновить</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
             </div>

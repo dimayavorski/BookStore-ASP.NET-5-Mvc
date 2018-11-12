@@ -145,7 +145,34 @@
     $(document).ready(function () {
         loadData();
     });
+    function Add() {
+        var res = validate();
+        if (res == false)
+            return false;
+        var bookObj = {
+            Name: $("#Name").val(),
+            Price: $("#Price").val(),
+            Description: $("#Decription").val(),
+            Author: $("#Author").val(),
+            Category: $("#Category").val()
 
+    };
+        $.ajax({
+            url: "/Admin/Create",
+            data: JSON.stringify(bookObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function(result) {
+                loadData();
+                $("#myModal").modal("hide");
+
+            },
+            error: function(errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
     //Load Data function
     function Update() {
         var res = validate();
@@ -157,7 +184,10 @@
             Name: $("#Name").val(),
             Price: $("#Price").val(),
             Description: $("#Decription").val(),
+            Author: $("#Author").val(),
+            Category: $("#Category").val()
         };
+        alert(bookObj.Category);
         $.ajax({
             url: "/Admin/Update",
             data: JSON.stringify(bookObj),
@@ -170,6 +200,8 @@
                 $('#Name').val("");
                 $('#Price').val("");
                 $('#Decription').val("");
+                $("#Author").val(),
+                $("#Category").val()
                
             },
             error: function (errormessage) {
@@ -220,6 +252,24 @@
                 }
             });
         }
+    }
+    function clearTextBox() {
+        $('#Id').val("");
+        $('#Name').val("");
+        $('#Price').val("");
+        $('#Decription').val("");
+        $('#Author').val('');
+        $('#Category').val('');
+        $('#btnUpdate').hide();
+        $('#EditingLabel').hide();
+        $('#AddingLabel').show();
+        $('#btnAdd').show();
+        $('#Name').css('border-color', 'lightgrey');
+        $('#Price').css('border-color', 'lightgrey');
+        $('#Decription').css('border-color', 'lightgrey');
+        $('#Author').css('border-color', 'lightgrey');
+        $('#Decription').css('border-color', 'lightgrey');
+   
     }
     function validate() {
         var isValid = true;
@@ -276,17 +326,19 @@
                 $('#Name').val(result.Name);
                 $('#Price').val(result.Price);
                 $('#Decription').val(result.Description);
-                $('#Author').val(result.Author);
-                $('#Category').val(result.Category);
-
+                $('#Author').val(result.AuthorId);
+                $('#Category').val(result.CategoryId);
                 $('#myModal').modal('show');
                 $('#btnUpdate').show();
+                $('#EditingLabel').show();
+                $('#AddingLabel').hide();
                 $('#btnAdd').hide();
             },
             error: function(errorMessage) {
                 alert(errorMessage.responseText);
             }
         });
+        
         return false;
     }
     

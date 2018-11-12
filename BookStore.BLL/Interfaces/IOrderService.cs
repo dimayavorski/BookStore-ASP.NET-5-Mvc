@@ -11,7 +11,7 @@ namespace BookStore.BLL.Interface
     public interface IOrderService
     {
        
-        IEnumerable<CategoryDTO> GetCategories();
+        
 
 
         Task AddToCart(BookDTO cartItem,string Id);

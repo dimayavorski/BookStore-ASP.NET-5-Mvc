@@ -74,9 +74,27 @@ namespace BookStore.BLL.Services
                 Id = book.Id,
                 Name = book.Name,
                 Price = book.Price,
-                Description = book.Description
+                Description = book.Description,
+                AuthorId = book.AuthorId,
+                CategoryId = book.CategoryId
+                
             };
             database.Books.Update(item);
+            database.Save();
+        }
+
+        public void CreateBook(BookDTO book)
+        {
+            Book item = new Book
+            {
+                Name = book.Name,
+                Price = book.Price,
+                Description = book.Description,
+                AuthorId = book.AuthorId,
+                CategoryId = book.CategoryId
+
+            };
+            database.Books.Create(item);
             database.Save();
         }
     }
