@@ -50,28 +50,10 @@ namespace BookStore.DAL.Repositories
 
         public void Update(Book item)
         {
-            Book updatedBook = db.Books.Where(b => b.Id == item.Id).FirstOrDefault();
             
-            if (updatedBook != null)
-            {
-                updatedBook.Name = item.Name;
-                updatedBook.Price = item.Price;
-                updatedBook.Description = item.Description;
-               
-
-            }
-            //var local = db.Set<Book>().Local.FirstOrDefault(c => c.Id == item.Id);
-            
-            //   db.Entry(local).State = EntityState.Detached;        
-               db.Entry(updatedBook).State = EntityState.Modified;
+               db.Entry(item).State = EntityState.Modified;
             
         }
-        private bool canUserAccessA(int ID)
-        {
-           
-            int aFound = db.Books.AsNoTracking().Where(x => x.Id == ID).Count();
-
-            return (aFound > 0); //if aFound > 0, then return true, else return false.
-        }
+       
     }
 }

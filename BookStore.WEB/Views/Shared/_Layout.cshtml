@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
    
     <link rel="stylesheet" href='@Url.Content("~/Content/themes/base/all.css")'/>
+    <link rel="stylesheet" href='@Url.Content("~/Content/themes/base/jquery-ui.css")'/>
     @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">*@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
@@ -91,8 +92,36 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript" src='@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")'></script>
+
+<script type="text/javascript" src='@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")'></script>
 <script>
+    
+    $(document).ready(function () {
+ 
+        $.ajaxSetup({ cache: false });
+ 
+        $(".viewDialog").on("click", function (e) {
+            e.preventDefault();
+ 
+            $("<div></div>")
+                .addClass("dialog")
+                .appendTo("body")
+                .dialog({
+                    title: $(this).attr("data-dialog-title"),
+                    close: function () { $(this).remove() },
+                    modal: true
+                })
+                .load(this.href);
+        });
+    });
+    function closeDialog() {
+        $(".dialog").dialog("destroy").remove();
+        
+    }
+   
+</script>
+<script>
+
     $(document).ready(function () {
         $("#success").removeClass("hidden");
         $("#success").hide();
@@ -141,7 +170,7 @@
         })
     });
 </script>
-<script>
+@*<script>
     $(document).ready(function () {
         loadData();
     });
@@ -342,7 +371,7 @@
         return false;
     }
     
-</script>
+</script>*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

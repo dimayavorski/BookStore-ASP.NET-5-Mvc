@@ -1,25 +1,27 @@
 ﻿@model IEnumerable<BookStore.BLL.DTO.BookDTO>
-<table class="table table-responsive">
+<table class="table table-hover table-responsive">
     <tbody>
     @foreach (var book in Model)
     {
         <tr>
             <td>@book.Name</td>
-            @*<td>
-                        <a href="@Url.Action("Edit", "Home", new { id = item.Id })" class = "editDialog"><i class="fa
-fa-pencil-square-o"></i>&nbsp;Edit</a>
-                    </td>*@
-            @*<td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Редактировать</button>
-                    </td>*@
+            <td>@book.Price руб</td>
+            <td>@book.Author</td>
+            <td>@book.Category</td>
             <td>
-                <a href="@Url.Action("Edit",new {id = book.Id})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Редактировать</a>
+                @Html.ActionLink("Изменить", "Edit", "Admin", new { id = book.Id },
+                    new {@class= "viewDialog", data_dialog_title = "Редактирование модели" })
             </td>
-            <td>@Ajax.ActionLink("Удалить", "Admin", "Delete", new { id = book.Id }, new AjaxOptions())</td>
+            <td>@Ajax.ActionLink("Удалить", "Admin", "Delete", new { id = book.Id }, new AjaxOptions
+           {
+               HttpMethod = "POST",
+               UpdateTargetId = "updateAdminPanel",
+               Confirm = "Вы действительно хотите удалить эту запись?"
+           })</td>
         </tr>
     }
     </tbody>
 </table>
+<script>
 
-
-
+</script>
