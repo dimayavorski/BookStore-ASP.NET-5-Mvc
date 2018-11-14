@@ -1,18 +1,22 @@
-﻿using System.Web.Mvc;
-using BookStore.BLL.DTO;
+﻿using BookStore.BLL.DTO;
 using BookStore.BLL.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
-namespace BookStore.WEB.Controllers
+namespace BookStore.WEB.Controllers.Admin
 {
     [Authorize(Roles = "admin")]
-    public class AdminController : Controller
+    public class BookController : Controller
     {
         // GET: Admin 
         private IBookService _bookService;
         private IAuthorService _authorService;
         private ICategoryService _categoryService;
 
-        public AdminController(IBookService bookService, IAuthorService authorService, ICategoryService categoryService)
+        public BookController(IBookService bookService, IAuthorService authorService, ICategoryService categoryService)
         {
             _categoryService = categoryService;
             _authorService = authorService;
@@ -25,13 +29,7 @@ namespace BookStore.WEB.Controllers
             return View(books);
         }
 
-        public ActionResult GetAllAuthors()
-        {
-            var authors = _authorService.GetAllAuthors();
-
-
-            return PartialView("ShowAuthors",authors);
-        }
+        
 
         public ActionResult GetAllBooks()
         {
@@ -47,10 +45,10 @@ namespace BookStore.WEB.Controllers
         public ActionResult Delete(int id)
         {
             var book = _bookService.GetBook(id);
-             _bookService.DeleteBook(id);
+            _bookService.DeleteBook(id);
             var books = _bookService.GetBooks(null, null);
             return PartialView("ShowBooks", books);
-            
+
         }
 
         public ActionResult Edit(int id)
@@ -60,7 +58,7 @@ namespace BookStore.WEB.Controllers
             ViewBag.authors = authors;
             ViewBag.categories = categories;
             var book = _bookService.GetBook(id);
-            
+
             return PartialView(book);
         }
 
@@ -68,7 +66,7 @@ namespace BookStore.WEB.Controllers
         public ActionResult Edit(BookDTO book)
         {
             _bookService.Update(book);
-            var books = _bookService.GetBooks(null,null);
+            var books = _bookService.GetBooks(null, null);
 
             return RedirectToAction("Main");
         }

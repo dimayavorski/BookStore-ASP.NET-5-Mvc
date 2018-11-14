@@ -22,15 +22,13 @@ namespace BookStore.DAL.Repositories
             db.Books.Add(item);
         }
 
-        public int Delete(int Id)
+        public void Delete(int Id)
         {
             Book book = db.Books.Find(Id);
             if (book != null)
             {
                 db.Books.Remove(book);
             }
-
-            return book.Id;
         }
 
         public IEnumerable<Book> Find(string searchString)

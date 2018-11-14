@@ -12,7 +12,8 @@ namespace BookStore.BLL.Interfaces
         IEnumerable<BookDTO> FindBooks(string searchName);
         BookDTO GetBook(int? id);
         IEnumerable<BookDTO> GetBooks(string category,string author);
-        int DeleteBook(int id);
+        IEnumerable<BookDTO> GetBooks();
+        void DeleteBook(int id);
         void Update(BookDTO book);
         void CreateBook(BookDTO book);
     }

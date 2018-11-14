@@ -71,7 +71,7 @@
             }
             @if (User.IsInRole("admin"))
             {
-                @Html.ActionLink("Админ панель","Main","Admin",null,new {@class = "btn btn-outline-light ml-1"})
+                @Html.ActionLink("Админ панель","Main","Book",null,new {@class = "btn btn-outline-light ml-1"})
             }
 
             <a class="btn btn-outline-light mx-1" href="@Url.Action("Index","ShoppingCart",  new { returnUrl = Request.Url.PathAndQuery })">

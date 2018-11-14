@@ -40,7 +40,7 @@ namespace BookStore.WEB.Controllers
                 books = bookService.FindBooks(searchName);
             
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookViewModel>()
-                .ForMember(vM=>vM.SmallDescription,src=>src.MapFrom(b=>b.Description.Substring(0,30)))
+                .ForMember(vM=>vM.SmallDescription,src=>src.MapFrom(b=>b.Description))
                 .ForMember(vM=>vM.BigDescription,src=>src.MapFrom(b=>b.Description))).CreateMapper();
             var booksViewModel = mapper.Map<IEnumerable<BookDTO>, List<BookViewModel>>(books);
 

@@ -6,31 +6,31 @@
 
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(m=>m.Id)
+   
+    @Html.HiddenFor(m => m.Id)
     <div class="form-group">
         <label for="Name">Название</label>
-        <input type="text" class="form-control" id="Name"/>
+        @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
 
     </div>
     <div class="form-group">
         <label for="Decription">Описание</label>
-        <textarea id="Decription" class="form-control" rows="6"></textarea>
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = "5" })
 
     </div>
     <div class="form-group">
         <label for="Price">Цена</label>
-        <input type="text" class="form-control" id="Price" placeholder="Например : 3000 руб"/>
+        @Html.EditorFor(m => m.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "Цена в бел. руб, например 10" } })
     </div>
     <div class="form-group">
         <label for="Author">Автор</label>
-        @Html.DropDownListFor(m=>m.AuthorId, ViewBag.authors as SelectList, new {id = "Author", @class = "form-control"})
+        @Html.DropDownListFor(m => m.AuthorId, ViewBag.authors as SelectList, new { id = "Author", @class = "form-control" })
     </div>
     <div class="form-group">
         <label for="Category">Жанр</label>
-        @Html.DropDownListFor(m=>m.CategoryId, ViewBag.categories as SelectList, new {id = "Category", @class = "form-control"})
+        @Html.DropDownListFor(m => m.CategoryId, ViewBag.categories as SelectList, new { id = "Category", @class = "form-control" })
     </div>
-
-    <input type="submit" value="Подтвердить" class="btn btn-primary" />
+    <button type="submit" class="btn btn-primary">Подтвердить</button>
 }
 
 

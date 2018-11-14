@@ -10,6 +10,6 @@ namespace BookStore.DAL.Interfaces
         T Get(int id);
         void Create(T item);
         void Update(T item);
-        int Delete(int Id);
+        void Delete(int Id);
     }
 }

@@ -59,11 +59,11 @@ namespace BookStore.BLL.Services
             return mapper.Map<IEnumerable<Book>, List<BookDTO>>(books);
         }
 
-        public int DeleteBook(int id)
+        public void DeleteBook(int id)
         {
-            int result = database.Books.Delete(id);
+            database.Books.Delete(id);
             database.Save();
-            return result;
+            
 
         }
 
@@ -96,6 +96,14 @@ namespace BookStore.BLL.Services
             };
             database.Books.Create(item);
             database.Save();
+        }
+
+        public IEnumerable<BookDTO> GetBooks()
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>().ForMember(dto => dto.Author,
+                src => src.MapFrom(b => b.Author.Name)).ForMember(dto => dto.Category,
+                src => src.MapFrom(b => b.Category.CategoryName))).CreateMapper();
+            return mapper.Map<IEnumerable<Book>, List<BookDTO>>(database.Books.GetAll());
         }
     }
 }

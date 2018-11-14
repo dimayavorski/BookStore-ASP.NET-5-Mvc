@@ -1,0 +1,27 @@
+﻿@model IEnumerable<BookStore.BLL.DTO.BookDTO>
+@Html.ActionLink("Добавить книгу", "Create", null, new { @class = "btn btn-primary mb-2" })
+<table class="table table-hover">
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Name</td>
+                <td>@book.Price руб</td>
+                <td>@book.Author</td>
+                <td>@book.Category</td>
+                <td>
+                    @Html.ActionLink("Изменить", "Edit", "Admin", new { id = book.Id },
+                        new {@class= "viewDialog", data_dialog_title = "Редактирование модели" })
+                </td>
+                <td>
+                    @Ajax.ActionLink("Удалить", "Delete", "Admin",
+                         new { id =book.Id},new AjaxOptions { HttpMethod="POST",UpdateTargetId = "updateAdminPanel",Confirm = "Вы действительно хотите удалить этот объект?"
+                         })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+
+</script>

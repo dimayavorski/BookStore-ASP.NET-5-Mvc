@@ -207,6 +207,9 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\Admin\AuthorController.cs" />
+    <Compile Include="Controllers\Admin\BookController.cs" />
+    <Compile Include="Controllers\Admin\GenreController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavController.cs" />
@@ -365,10 +368,12 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\SuccessRegister.cshtml" />
-    <Content Include="Views\Admin\Main.cshtml" />
-    <Content Include="Views\Admin\ShowBooks.cshtml" />
+    <Content Include="Views\Book\Main.cshtml" />
+    <Content Include="Views\Book\ShowBooks.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Author\ShowAuthors.cshtml" />
+    <Content Include="Views\Genre\ShowGenres.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

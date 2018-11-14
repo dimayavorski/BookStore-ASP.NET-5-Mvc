@@ -11,7 +11,7 @@
     }
    
 </style>
-    <ul class="nav flex-column nav-pills">
+@*<ul class="nav flex-column nav-pills">
         <li class="nav-item">
             @Html.ActionLink("Главная", "Index", "Home",null,new {@class ="nav-link" })
         </li>
@@ -59,7 +59,59 @@
                 }
             </ul>
         </li>
-</ul>    
+</ul>*@    
+<div class="btn-group-vertical">
+    
+        @Html.ActionLink("Главная", "Index", "Home",null,new {@class ="btn btn-primary" })
+    
+        
+    
+        <div class="dropdown">
+ <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Жанры
+        </button> 
+        <div class="dropdown-menu">
+        @foreach (var link in Model.Categories)
+            {
+                @Html.RouteLink(link.CategoryName, new
+                {
+                    controller = "Home",
+                    action = "Index",    
+                    category = link.CategoryName,
+                }, new
+                {
+                    @class = "dropdown-item"
+                })
+            }
+        </div>
+    </div>
+        <button class="btn btn-primary">Авторы</button>
+            @foreach (var link in Model.Authors)
+            {
+               
+
+                @Html.RouteLink(link.Name, new
+                    {
+                        controller = "Home",
+                        action = "Index",
+                        author = link.Name,
+                    },new
+                    {
+                        @class = "btn btn-primary"
+                    })
+               
+            }
+</div>    
+<div class="dropdown">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        Dropdown button
+    </button>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Link 1</a>
+        <a class="dropdown-item" href="#">Link 2</a>
+        <a class="dropdown-item" href="#">Link 3</a>
+    </div>
+</div>
 <h4 class=" btn btn-success default hidden" id="success">Добавлено в корзину</h4>   
 
 
