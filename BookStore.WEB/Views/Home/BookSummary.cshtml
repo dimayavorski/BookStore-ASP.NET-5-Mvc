@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<BookStore.WEB.Models.BookViewModel>
+﻿@model PagedList.IPagedList<BookStore.WEB.ViewModels.BookViewModel>
 @using PagedList.Mvc;
 
 @foreach (var book in Model)
@@ -17,7 +17,7 @@
                     <span class="hideDescription btn-group dropup text-muted">Свернуть</span>
                 </p>
             </div>*@
-            <p class="card-text">@book.BigDescription</p>  
+            <p class="card-text">@book.Description</p>  
 
             <h6 class="card-t">Цена : @book.Price.ToString("# руб")</h6>
             @Ajax.ActionLink("Добавить в корзину", "Index", "Home", new {searchName = @ViewBag.searchName, id = book.Id,

@@ -10,5 +10,6 @@ namespace BookStore.BLL.Interfaces
     public interface IAuthorService
     {
         IEnumerable<AuthorDTO> GetAllAuthors();
+        void CreateAuthor(AuthorDTO authorDTO);
     }
 }

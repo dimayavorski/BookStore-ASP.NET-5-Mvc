@@ -206,7 +206,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Admin\AuthorController.cs" />
     <Compile Include="Controllers\Admin\BookController.cs" />
     <Compile Include="Controllers\Admin\GenreController.cs" />
@@ -217,7 +216,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BookViewModel.cs" />
+    <Compile Include="ViewModels\BookViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\IShoppingCartFactory.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
@@ -227,6 +226,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\DependencyNinjectModule.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
+    <Compile Include="ViewModels\AuthorViewModel.cs" />
+    <Compile Include="ViewModels\CreateBookViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
@@ -370,10 +371,11 @@
     <Content Include="Views\Account\SuccessRegister.cshtml" />
     <Content Include="Views\Book\Main.cshtml" />
     <Content Include="Views\Book\ShowBooks.cshtml" />
-    <Content Include="Views\Admin\Edit.cshtml" />
-    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Book\Edit.cshtml" />
+    <Content Include="Views\Book\Create.cshtml" />
     <Content Include="Views\Author\ShowAuthors.cshtml" />
     <Content Include="Views\Genre\ShowGenres.cshtml" />
+    <Content Include="Views\Author\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

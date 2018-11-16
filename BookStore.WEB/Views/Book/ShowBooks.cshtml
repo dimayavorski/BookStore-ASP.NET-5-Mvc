@@ -10,11 +10,11 @@
                 <td>@book.Author</td>
                 <td>@book.Category</td>
                 <td>
-                    @Html.ActionLink("Изменить", "Edit", "Admin", new { id = book.Id },
+                    @Html.ActionLink("Изменить", "Edit", "Book", new { id = book.Id },
                         new {@class= "viewDialog", data_dialog_title = "Редактирование модели" })
                 </td>
                 <td>
-                    @Ajax.ActionLink("Удалить", "Delete", "Admin",
+                    @Ajax.ActionLink("Удалить", "Delete", "Book",
                          new { id =book.Id},new AjaxOptions { HttpMethod="POST",UpdateTargetId = "updateAdminPanel",Confirm = "Вы действительно хотите удалить этот объект?"
                          })
                 </td>
@@ -23,5 +23,28 @@
     </tbody>
 </table>
 <script>
+
+    $(document).ready(function () {
+
+        $.ajaxSetup({ cache: false });
+
+        $(".viewDialog").on("click", function (e) {
+            e.preventDefault();
+
+            $("<div></div>")
+                .addClass("dialog")
+                .appendTo("body")
+                .dialog({
+                    title: $(this).attr("data-dialog-title"),
+                    close: function () { $(this).remove() },
+                    modal: true
+                })
+                .load(this.href);
+        });
+    });
+    function closeDialog() {
+        $(".dialog").dialog("destroy").remove();
+
+    }
 
 </script>

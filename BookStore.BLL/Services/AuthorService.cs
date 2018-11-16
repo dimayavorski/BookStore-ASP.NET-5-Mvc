@@ -18,6 +18,14 @@ namespace BookStore.BLL.Services
         {
             database = uow;
         }
+
+        public void CreateAuthor(AuthorDTO authorDTO)
+        {
+            Author author = new Author {Id = authorDTO.Id,Name = authorDTO.Name};
+            database.Authors.Create(author);
+            database.Save();
+        }
+
         public IEnumerable<AuthorDTO> GetAllAuthors()
         {
             var mapper = new MapperConfiguration(cfg=>cfg.CreateMap<Author,AuthorDTO>()).CreateMapper();

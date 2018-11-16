@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BookStore.WEB.ViewModels;
+using Ninject.Infrastructure.Language;
 
 namespace BookStore.WEB.Controllers.Admin
 {
@@ -36,11 +38,7 @@ namespace BookStore.WEB.Controllers.Admin
             var books = _bookService.GetBooks();
             return PartialView("ShowBooks", books);
         }
-        public JsonResult GetById(int id)
-        {
-            var book = _bookService.GetBook(id);
-            return Json(book, JsonRequestBehavior.AllowGet);
-        }
+        
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -61,29 +59,59 @@ namespace BookStore.WEB.Controllers.Admin
 
             return PartialView(book);
         }
+       
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(BookDTO book)
         {
-            _bookService.Update(book);
-            var books = _bookService.GetBooks(null, null);
+            if (ModelState.IsValid)
+            {
+                _bookService.Update(book);
+                var books = _bookService.GetBooks(null, null);
 
-            return RedirectToAction("Main");
+                return PartialView("ShowBooks", books);
+            }
+
+            return PartialView("Edit", book);
+
         }
 
         public ActionResult Create()
         {
-            SelectList authors = new SelectList(_authorService.GetAllAuthors(), "Id", "Name");
-            SelectList categories = new SelectList(_categoryService.GetCategories(), "Id", "CategoryName");
-            ViewBag.authors = authors;
-            ViewBag.categories = categories;
-            return View();
+
+            CreateBookViewModel viewModel = new CreateBookViewModel
+            {
+                Authors = new SelectList(_authorService.GetAllAuthors(), "Id", "Name"),
+                Genres = new SelectList(_categoryService.GetCategories(), "Id", "CategoryName")
+            };
+            return View(viewModel);
         }
         [HttpPost]
-        public ActionResult Create(BookDTO book)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CreateBookViewModel viewModel)
         {
-            _bookService.CreateBook(book);
-            return RedirectToAction("Main");
+            if (ModelState.IsValid)
+            {
+                BookDTO bookDTO = new BookDTO
+                {
+                    Id = viewModel.Id,
+                    Name = viewModel.Name,
+                    Price = viewModel.Price,
+                    CategoryId = viewModel.CategoryId,
+                    Description = viewModel.Description,
+                    AuthorId = viewModel.AuthorId
+                };
+               
+                _bookService.CreateBook(bookDTO);
+                return RedirectToAction("Main");
+            }
+            else
+            {
+                ModelState.AddModelError("","Введенные данные неккоректны");
+            }
+
+            return View(viewModel);
         }
     }
 }

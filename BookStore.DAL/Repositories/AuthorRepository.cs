@@ -19,7 +19,7 @@ namespace BookStore.DAL.Repositories
 
         public void Create(Author item)
         {
-            throw new NotImplementedException();
+            db.Authors.Add(item);
         }
 
         public void Delete(int Id)

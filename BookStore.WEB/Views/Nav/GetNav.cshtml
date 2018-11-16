@@ -10,68 +10,15 @@
         display: none;
     }
    
-</style>
-@*<ul class="nav flex-column nav-pills">
-        <li class="nav-item">
-            @Html.ActionLink("Главная", "Index", "Home",null,new {@class ="nav-link" })
-        </li>
-        <li class="nav-item">
-            <a class="nav-link">
-                Жанры
-            </a>
-
-            <ul>
-                @foreach (var link in Model.Categories)
-                {
-                    
-                    <li class="nav-item">
-                        @Html.RouteLink(link.CategoryName, new
-                        {
-                            controller = "Home",
-                            action = "Index",    
-                            category = link.CategoryName,
-                        }, new
-                        {
-                            @class = "nav-link " + (link.CategoryName == ViewBag.SelectedCategegory ? "active" : "")
-                        })
-                    </li>
-
-                    
-                }
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link">Авторы</a>
-            <ul>
-                @foreach (var link in Model.Authors)
-                {
-                    <li class="nav-item">
-                        @Html.RouteLink(link.Name, new
-                        {
-                            controller = "Home",
-                            action = "Index",
-                            author = link.Name,
-                        }, new
-                        {
-                            @class = "nav-link " + (link.Name == ViewBag.SelectedAuthor ? "active" : "")
-                        })
-                    </li>
-                }
-            </ul>
-        </li>
-</ul>*@    
-<div class="btn-group-vertical">
-    
-        @Html.ActionLink("Главная", "Index", "Home",null,new {@class ="btn btn-primary" })
-    
-        
-    
-        <div class="dropdown">
- <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Жанры
+</style>  
+<div class="btn-group-vertical btn-group-lg">
+    @Html.ActionLink("Главная", "Index", "Home",null,new {@class ="btn btn-primary" })
+    <div class="btn-group dropright">
+        <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Жанры
         </button> 
         <div class="dropdown-menu">
-        @foreach (var link in Model.Categories)
+            @foreach (var link in Model.Categories)
             {
                 @Html.RouteLink(link.CategoryName, new
                 {
@@ -84,34 +31,31 @@
                 })
             }
         </div>
-    </div>
-        <button class="btn btn-primary">Авторы</button>
+        </div>
+    <div class="btn-group dropright">
+        <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Аторы
+        </button>
+        <div class="dropdown-menu">
             @foreach (var link in Model.Authors)
             {
-               
+
 
                 @Html.RouteLink(link.Name, new
-                    {
-                        controller = "Home",
-                        action = "Index",
-                        author = link.Name,
-                    },new
-                    {
-                        @class = "btn btn-primary"
-                    })
-               
+                {
+                    controller = "Home",
+                    action = "Index",
+                    author = link.Name,
+                },new
+                {
+                    @class = "dropdown-item"
+                })
+
             }
-</div>    
-<div class="dropdown">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-        Dropdown button
-    </button>
-    <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Link 1</a>
-        <a class="dropdown-item" href="#">Link 2</a>
-        <a class="dropdown-item" href="#">Link 3</a>
+        </div>
     </div>
-</div>
+</div>    
+
 <h4 class=" btn btn-success default hidden" id="success">Добавлено в корзину</h4>   
 
 

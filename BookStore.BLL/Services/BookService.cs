@@ -35,7 +35,9 @@ namespace BookStore.BLL.Services
                 throw new ValidationException("Книга не найдена", "");
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>().ForMember(dto => dto.Author,
                 src => src.MapFrom(b => b.Author.Name)).ForMember(dto => dto.Category,
-                src => src.MapFrom(b => b.Category.CategoryName))).CreateMapper();
+                src => src.MapFrom(b => b.Category.CategoryName)).ForMember(dto => dto.CategoryId,
+                src => src.MapFrom(b => b.Category.Id)).ForMember(dto => dto.AuthorId,
+                src => src.MapFrom(b => b.Author.Id))).CreateMapper();
             return mapper.Map<Book, BookDTO>(database.Books.Get(id.Value));
 
         }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BookStore.BLL.DTO;
+using BookStore.WEB.ViewModels;
 
 namespace BookStore.WEB.Controllers.Admin
 {
@@ -27,6 +29,26 @@ namespace BookStore.WEB.Controllers.Admin
 
 
             return PartialView("ShowAuthors", authors);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(AuthorViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                AuthorDTO authorDTO = new AuthorDTO{ Id = viewModel.Id, Name = viewModel.Name};
+                //TryUpdateModel(authorDTO);
+                _authorService.CreateAuthor(authorDTO);
+                return RedirectToAction("Main", "Book");
+            }
+
+            return View(viewModel);
         }
     }
 }

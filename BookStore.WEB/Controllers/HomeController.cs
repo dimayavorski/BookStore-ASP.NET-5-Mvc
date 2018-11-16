@@ -9,6 +9,7 @@ using AutoMapper;
 using BookStore.WEB.Models;
 using System.Threading.Tasks;
 using BookStore.BLL.Interfaces;
+using BookStore.WEB.ViewModels;
 
 namespace BookStore.WEB.Controllers
 {
@@ -39,9 +40,7 @@ namespace BookStore.WEB.Controllers
             else
                 books = bookService.FindBooks(searchName);
             
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookViewModel>()
-                .ForMember(vM=>vM.SmallDescription,src=>src.MapFrom(b=>b.Description))
-                .ForMember(vM=>vM.BigDescription,src=>src.MapFrom(b=>b.Description))).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookViewModel>()).CreateMapper();
             var booksViewModel = mapper.Map<IEnumerable<BookDTO>, List<BookViewModel>>(books);
 
 
