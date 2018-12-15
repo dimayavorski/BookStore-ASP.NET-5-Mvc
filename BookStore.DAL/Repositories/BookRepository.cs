@@ -43,7 +43,7 @@ namespace BookStore.DAL.Repositories
 
         public IEnumerable<Book> GetAll()
         {
-            return db.Books.Include(b=>b.Author).Include(b=>b.Category);
+            return db.Books.Include(b=>b.Author).Include(b=>b.Category).ToList();
         }
 
         public void Update(Book item)

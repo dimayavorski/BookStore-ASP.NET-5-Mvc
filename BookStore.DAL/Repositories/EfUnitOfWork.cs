@@ -32,15 +32,7 @@ namespace BookStore.DAL.Repositories
             get { return userManager; }
         }
 
-        public IAuthorRepository Authors
-         {
-            get
-            {
-            if(_authorRepository==null)
-                _authorRepository = new AuthorRepository(db);
-                return _authorRepository;
-            }
-        }
+      
 
         public ApplicationRoleManager RoleManager
         {
@@ -63,6 +55,15 @@ namespace BookStore.DAL.Repositories
                 if (_categoryRepository == null)
                     _categoryRepository = new CategoryRepository(db);
                 return _categoryRepository;
+            }
+        }
+        public IAuthorRepository Authors
+        {
+            get
+            {
+                if (_authorRepository == null)
+                    _authorRepository = new AuthorRepository(db);
+                return _authorRepository;
             }
         }
 

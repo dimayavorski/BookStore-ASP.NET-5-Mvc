@@ -1,0 +1,18 @@
+﻿@model  BookStore.WEB.ViewModels.AuthorViewModel
+<div>
+    @using (Ajax.BeginForm("Edit", "Author", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "updateAdminPanel", OnSuccess = "closeDialog()" }))
+    { 
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.Id)
+        <div class="form-group">
+            <label for="Name">Название</label>
+            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <input type="submit" value="Подтвердить" class="btn btn-secondary" />
+    }
+</div>
+
+

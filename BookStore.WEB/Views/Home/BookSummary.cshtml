@@ -10,13 +10,6 @@
         <div class="card-body">
             <h6 class="card-text">Жанр : @book.Category</h6>
             <h6 class="card-title">Автор : @book.Author</h6>
-            @*<div class="description">
-                <span class="smDescription">@book.SmallDescription</span>
-                <span class="showDescription dropdown-toggle text-muted"> Показать полностью</span>
-                <p class="card-text bigDescription hidden">@book.BigDescription  
-                    <span class="hideDescription btn-group dropup text-muted">Свернуть</span>
-                </p>
-            </div>*@
             <p class="card-text">@book.Description</p>  
 
             <h6 class="card-t">Цена : @book.Price.ToString("# руб")</h6>

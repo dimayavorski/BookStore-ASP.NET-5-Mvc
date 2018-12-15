@@ -1,12 +1,9 @@
 ﻿using BookStore.BLL.DTO;
 using BookStore.BLL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using BookStore.WEB.ViewModels;
-using Ninject.Infrastructure.Language;
+
 
 namespace BookStore.WEB.Controllers.Admin
 {
@@ -27,7 +24,9 @@ namespace BookStore.WEB.Controllers.Admin
 
         public ActionResult Main()
         {
-            var books = _bookService.GetBooks(null, null);
+            var mapper = new MapperConfiguration(cfg=>cfg.CreateMap<BookDTO,BookViewModel>()).CreateMapper();
+            var books = _bookService.GetBooks();
+           
             return View(books);
         }
 
@@ -44,36 +43,43 @@ namespace BookStore.WEB.Controllers.Admin
         {
             var book = _bookService.GetBook(id);
             _bookService.DeleteBook(id);
-            var books = _bookService.GetBooks(null, null);
-            return PartialView("ShowBooks", books);
-
+            var books = _bookService.GetBooks();
+             return PartialView("ShowBooks", books);
         }
 
         public ActionResult Edit(int id)
         {
-            SelectList authors = new SelectList(_authorService.GetAllAuthors(), "Id", "Name");
-            SelectList categories = new SelectList(_categoryService.GetCategories(), "Id", "CategoryName");
-            ViewBag.authors = authors;
-            ViewBag.categories = categories;
             var book = _bookService.GetBook(id);
-
-            return PartialView(book);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, CreateBookViewModel>()).CreateMapper();
+            var viewModel = mapper.Map<BookDTO, CreateBookViewModel>(book);
+            viewModel.Authors = new SelectList(_authorService.GetAllAuthors(), "Id", "Name");
+            viewModel.Genres = new SelectList(_categoryService.GetCategories(), "Id", "CategoryName");
+            return PartialView(viewModel);
         }
-       
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(BookDTO book)
+        public ActionResult Edit(CreateBookViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _bookService.Update(book);
-                var books = _bookService.GetBooks(null, null);
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CreateBookViewModel,BookDTO>()).CreateMapper();
+                var bookDTO = mapper.Map<CreateBookViewModel,BookDTO>(viewModel);
+                _bookService.Update(bookDTO);
+                var books = _bookService.GetBooks();
 
                 return PartialView("ShowBooks", books);
+                
             }
-
-            return PartialView("Edit", book);
+            else
+            {
+                ModelState.AddModelError("","Данные заполнены неверно");
+            }
+            viewModel.Authors = new SelectList(_authorService.GetAllAuthors(), "Id", "Name");
+            viewModel.Genres = new SelectList(_categoryService.GetCategories(), "Id", "CategoryName");
+            return PartialView("Edit", viewModel);
 
         }
 

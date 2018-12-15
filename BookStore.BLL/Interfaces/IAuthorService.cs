@@ -11,5 +11,8 @@ namespace BookStore.BLL.Interfaces
     {
         IEnumerable<AuthorDTO> GetAllAuthors();
         void CreateAuthor(AuthorDTO authorDTO);
+        void DeleteAuthor(int id);
+        void Update(AuthorDTO authorDTO);
+        AuthorDTO GetAuthor(int id);
     }
 }

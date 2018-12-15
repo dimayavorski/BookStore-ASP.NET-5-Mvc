@@ -69,34 +69,19 @@ namespace BookStore.BLL.Services
 
         }
 
-        public void Update(BookDTO book)
+        public void Update(BookDTO bookDTO)
         {
-            Book item = new Book
-            {
-                Id = book.Id,
-                Name = book.Name,
-                Price = book.Price,
-                Description = book.Description,
-                AuthorId = book.AuthorId,
-                CategoryId = book.CategoryId
-                
-            };
-            database.Books.Update(item);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
+            var book = mapper.Map<BookDTO, Book>(bookDTO);
+            database.Books.Update(book);
             database.Save();
         }
 
-        public void CreateBook(BookDTO book)
+        public void CreateBook(BookDTO bookDTO)
         {
-            Book item = new Book
-            {
-                Name = book.Name,
-                Price = book.Price,
-                Description = book.Description,
-                AuthorId = book.AuthorId,
-                CategoryId = book.CategoryId
-
-            };
-            database.Books.Create(item);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
+            var book = mapper.Map<BookDTO, Book>(bookDTO);
+            database.Books.Create(book);
             database.Save();
         }
 

@@ -1,0 +1,16 @@
+﻿@model BookStore.WEB.Models.CategoryViewModel
+@{
+    ViewBag.Title = "Добавление книги";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4>Добавление жанра</h4>
+@using (Html.BeginForm("Create","Genre"))
+{
+    @Html.AntiForgeryToken()
+<div class="form-group">
+    <label>Название</label>
+    @Html.EditorFor(m => m.CategoryName, null, new { htmlAttributes = new { @class = "form-control col-sm-4", placeholder = "Например: Классика" } })
+    @Html.ValidationMessageFor(m => m.CategoryName)
+</div>
+    <input type="submit" value="Подтвердить" class="btn btn-primary"/>
+}

@@ -13,8 +13,3 @@
 <div class="float-right">
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page, category = ViewBag.category }))
 </div>
-@*@model BookStore.WEB.Models.BookViewModel 
-
-    <div id="updateProducts">
-            @Html.Partial("BookSummary")
-        </div>*@

@@ -10,5 +10,10 @@ namespace BookStore.BLL.Interfaces
     public interface ICategoryService
     {
         IEnumerable<CategoryDTO> GetCategories();
+        CategoryDTO GetGenre(int id);
+        void Update(CategoryDTO categoryDTO);
+        void DeleteGenre(int id);
+        void CreateGenre(CategoryDTO categoryDTO);
     }
+    
 }

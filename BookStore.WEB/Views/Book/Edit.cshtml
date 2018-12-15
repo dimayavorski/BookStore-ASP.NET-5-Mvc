@@ -1,12 +1,13 @@
-﻿@model  BookStore.BLL.DTO.BookDTO
+﻿@model  BookStore.WEB.ViewModels.CreateBookViewModel
 <div>
-    @*@using(Html.BeginForm())*@
-    @using (Ajax.BeginForm("Edit", "Book", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "updateAdminPanel", OnSuccess = "closeDialog" }))
+  
+    @using (Ajax.BeginForm("Edit", "Book", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "updateAdminPanel", OnSuccess = "closeDialog"}))
     {
 
         
-        @Html.HiddenFor(m => m.Id)
         @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
         <div class="form-group">
             <label for="Name">Название</label>
             @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
@@ -21,17 +22,20 @@
             <label for="Price">Цена</label>
             @Html.EditorFor(m => m.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "Цена в бел. руб, например 10" } })
             @Html.ValidationMessageFor(m => m.Price)
+            
         </div>
         <div class="form-group">
             <label for="Author">Автор</label>
-            @Html.DropDownListFor(m => m.AuthorId, ViewBag.authors as SelectList,null ,new {@class = "form-control"})
+            @Html.DropDownListFor(m => m.AuthorId, Model.Authors as SelectList,null ,new {@class = "form-control"})
+            @Html.ValidationMessageFor(m=>m.AuthorId)
       
         </div>
         <div class="form-group">
             <label for="Category">Жанр</label>
-            @Html.DropDownListFor(m => m.CategoryId, ViewBag.categories as SelectList, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.CategoryId, Model.Genres as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m=>m.CategoryId)
        
         </div>
-        <button type="submit" class="btn btn-secondary">Подтвердить</button>
+        <input type="submit" class="btn btn-secondary" value ="Подтвердить"/>
     }
 </div>

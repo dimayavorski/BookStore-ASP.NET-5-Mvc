@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,12 +25,16 @@ namespace BookStore.DAL.Repositories
 
         public void Delete(int Id)
         {
-            throw new NotImplementedException();
+            var author = db.Authors.Find(Id);
+            if(!ReferenceEquals(author,null))
+            {
+                db.Authors.Remove(author);
+            }
         }
 
         public Author Get(int id)
         {
-            throw new NotImplementedException();
+            return db.Authors.Where(b => b.Id == id).FirstOrDefault();
         }
 
         public IEnumerable<Author> GetAll()
@@ -39,7 +44,7 @@ namespace BookStore.DAL.Repositories
 
         public void Update(Author item)
         {
-            throw new NotImplementedException();
+            db.Entry(item).State = EntityState.Modified;
         }
     }
 }

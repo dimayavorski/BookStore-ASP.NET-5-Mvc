@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BookStore.DAL.Entities;
 using System.Collections;
 using BookStore.DAL.EF;
+using System.Data.Entity;
 
 namespace BookStore.DAL.Repositories
 {
@@ -19,27 +20,31 @@ namespace BookStore.DAL.Repositories
         }
         public void Create(Category item)
         {
-            throw new NotImplementedException();
+            db.Categories.Add(item);
         }
 
         public void Delete(int Id)
         {
-            throw new NotImplementedException();
+            var category = db.Categories.Find(Id);
+            if (!ReferenceEquals(category, null))
+            {
+                db.Categories.Remove(category);
+            }
         }
 
         public Category Get(int id)
         {
-            throw new NotImplementedException();
+            return db.Categories.Where(c=>c.Id==id).FirstOrDefault();
         }
 
         public IEnumerable<Category> GetAll()
         {
-            return db.Categories;
+            return db.Categories.ToList();
         }
 
         public void Update(Category item)
         {
-            throw new NotImplementedException();
+            db.Entry(item).State = EntityState.Modified;
         }
     }
 }

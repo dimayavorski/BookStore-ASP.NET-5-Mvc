@@ -1,21 +1,50 @@
-﻿@model IEnumerable<BookStore.BLL.DTO.AuthorDTO>
+﻿@model IEnumerable<BookStore.WEB.ViewModels.AuthorViewModel>
 @Html.ActionLink("Добавить автора", "Create", null, new { @class = "btn btn-primary mb-2" })
 <table class="table table-hover">
     <tbody>
-    @foreach (var author in Model)
-    {
-        <tr>
-            <td>@author.Name</td>
-            <td>
-                @Html.ActionLink("Изменить", "Edit", "Admin", new { id = author.Id },
-                    new {@class= "viewDialog", data_dialog_title = "Редактирование модели" })
-            </td>
-            <td>
-                @Ajax.ActionLink("Удалить", "Delete", "Admin",
-                    new { id =author.Id},new AjaxOptions { HttpMethod="POST",UpdateTargetId = "updateAdminPanel",Confirm = "Вы действительно хотите удалить этот объект?"
-                    })
-            </td>
-        </tr>
-    }
+        @foreach (var author in Model)
+        {
+            <tr>
+                <td>@author.Name</td>
+                <td>
+                    @Html.ActionLink("Изменить", "Edit", "Author", new { id = author.Id },
+                        new {@class= "viewDialog", data_dialog_title = "Редактирование модели" })
+                </td>
+                <td>
+                    @Ajax.ActionLink("Удалить", "Delete", "Author",
+                        new { id =author.Id},new AjaxOptions { HttpMethod="POST",UpdateTargetId = "updateAdminPanel",Confirm = "Вы действительно хотите удалить этот объект?"
+                        })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<script>
+
+    $(document).ready(function () {
+
+        $.ajaxSetup({ cache: false });
+
+        $(".viewDialog").on("click", function (e) {
+            e.preventDefault();
+
+            $("<div></div>")
+                .addClass("dialog")
+                .appendTo("body")
+                .dialog({
+                    title: $(this).attr("data-dialog-title"),
+                    close: function () { $(this).remove() },
+                    modal: true
+
+                })
+                .load(this.href);
+        });
+    });
+    function closeDialog() {
+        $(".dialog").dialog("destroy").remove();
+    }
+
+</script>
+
+
+

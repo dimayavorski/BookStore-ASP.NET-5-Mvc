@@ -376,6 +376,9 @@
     <Content Include="Views\Author\ShowAuthors.cshtml" />
     <Content Include="Views\Genre\ShowGenres.cshtml" />
     <Content Include="Views\Author\Create.cshtml" />
+    <Content Include="Views\Author\Edit.cshtml" />
+    <Content Include="Views\Genre\Edit.cshtml" />
+    <Content Include="Views\Genre\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

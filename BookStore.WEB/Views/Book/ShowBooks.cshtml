@@ -38,13 +38,13 @@
                     title: $(this).attr("data-dialog-title"),
                     close: function () { $(this).remove() },
                     modal: true
+                 
                 })
                 .load(this.href);
         });
     });
     function closeDialog() {
         $(".dialog").dialog("destroy").remove();
-
     }
 
 </script>
