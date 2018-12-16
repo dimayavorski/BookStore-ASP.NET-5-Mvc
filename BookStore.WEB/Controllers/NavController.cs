@@ -15,8 +15,8 @@ namespace BookStore.WEB.Controllers
        
         private IOrderService _orderService;
         private IAuthorService _authorService;
-        private ICategoryService _categoryService;
-        public NavController(IOrderService orderService,ICategoryService categoryService,IAuthorService authorService)
+        private IGenreService _categoryService;
+        public NavController(IOrderService orderService,IGenreService categoryService,IAuthorService authorService)
         {
             _categoryService = categoryService;
             _orderService = orderService;

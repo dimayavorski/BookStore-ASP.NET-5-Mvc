@@ -29,10 +29,10 @@ namespace BookStore.DAL.EF
             //End Authors Initialize
 
             //Start Categories Initialize
-            context.Categories.Add(new Category { Id = 1, CategoryName = "Классика" });
-            context.Categories.Add(new Category { Id = 2, CategoryName = "Фентези" });
-            context.Categories.Add(new Category { Id = 3, CategoryName = "Ужасы" });
-            context.Categories.Add(new Category { Id = 4, CategoryName = "Драмма"});
+            context.Genres.Add(new Genre { Id = 1, CategoryName = "Классика" });
+            context.Genres.Add(new Genre { Id = 2, CategoryName = "Фентези" });
+            context.Genres.Add(new Genre { Id = 3, CategoryName = "Ужасы" });
+            context.Genres.Add(new Genre { Id = 4, CategoryName = "Драмма"});
 
             //End Categories Initialize
 

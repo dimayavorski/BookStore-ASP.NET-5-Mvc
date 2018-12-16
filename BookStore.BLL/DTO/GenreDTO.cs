@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.DAL.Entities
+namespace BookStore.BLL.DTO
 {
-    public class Category
+     public class GenreDTO
     {
         public int Id { get; set; }
         public string CategoryName { get; set; }
-        
     }
 }

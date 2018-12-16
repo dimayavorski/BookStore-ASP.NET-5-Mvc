@@ -15,7 +15,7 @@ namespace BookStore.DAL.Repositories
     {
         private BookContext db;
         private IBookRepository _bookRepository;
-        private ICategoryRepository _categoryRepository;
+        private IGenreRepository _categoryRepository;
         private ICartRepository _cartRepository;
         private ApplicationUserManager userManager;
         private ApplicationRoleManager roleManager;
@@ -48,12 +48,12 @@ namespace BookStore.DAL.Repositories
             }
         }
 
-        public ICategoryRepository Categories
+        public IGenreRepository Categories
         {
             get
             {
                 if (_categoryRepository == null)
-                    _categoryRepository = new CategoryRepository(db);
+                    _categoryRepository = new GenreRepository(db);
                 return _categoryRepository;
             }
         }

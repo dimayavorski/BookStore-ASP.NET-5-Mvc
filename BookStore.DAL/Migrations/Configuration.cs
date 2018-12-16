@@ -35,10 +35,10 @@ namespace BookStore.DAL.Migrations
             //End Authors Initialize
 
             //Start Categories Initialize
-            context.Categories.AddOrUpdate(new Category { Id = 1, CategoryName = "Классика" });
-            context.Categories.AddOrUpdate(new Category { Id = 2, CategoryName = "Фентези" });
-            context.Categories.AddOrUpdate(new Category { Id = 3, CategoryName = "Ужасы" });
-            context.Categories.AddOrUpdate(new Category { Id = 4, CategoryName = "Драмма" });
+            context.Genres.AddOrUpdate(new Genre { Id = 1, CategoryName = "Классика" });
+            context.Genres.AddOrUpdate(new Genre { Id = 2, CategoryName = "Фентези" });
+            context.Genres.AddOrUpdate(new Genre { Id = 3, CategoryName = "Ужасы" });
+            context.Genres.AddOrUpdate(new Genre { Id = 4, CategoryName = "Драмма" });
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

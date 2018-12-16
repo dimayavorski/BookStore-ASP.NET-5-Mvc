@@ -8,7 +8,7 @@ namespace BookStore.WEB.ViewModels
 {
     public class MenuViewModel
     {
-        public List<CategoryDTO> Categories { get; set; }
+        public List<GenreDTO> Categories { get; set; }
         public List<AuthorDTO> Authors { get; set; }
     }
 }

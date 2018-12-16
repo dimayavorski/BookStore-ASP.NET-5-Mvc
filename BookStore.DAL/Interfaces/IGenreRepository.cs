@@ -2,7 +2,7 @@
 
 namespace BookStore.DAL.Interfaces
 {
-    public interface ICategoryRepository : IRepository<Category>
+    public interface IGenreRepository : IRepository<Genre>
     {
 
     }

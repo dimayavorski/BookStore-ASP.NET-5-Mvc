@@ -17,9 +17,9 @@ namespace BookStore.WEB.Controllers.Admin
         // GET: Author
         private IBookService _bookService;
         private IAuthorService _authorService;
-        private ICategoryService _categoryService;
+        private IGenreService _categoryService;
 
-        public AuthorController(IBookService bookService, IAuthorService authorService, ICategoryService categoryService)
+        public AuthorController(IBookService bookService, IAuthorService authorService, IGenreService categoryService)
         {
             _categoryService = categoryService;
             _authorService = authorService;

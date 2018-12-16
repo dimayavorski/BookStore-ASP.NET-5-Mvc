@@ -11,38 +11,38 @@ using System.Data.Entity;
 
 namespace BookStore.DAL.Repositories
 {
-    public class CategoryRepository : ICategoryRepository
+    public class GenreRepository : IGenreRepository
     {
         private BookContext db;
-        public CategoryRepository(BookContext context)
+        public GenreRepository(BookContext context)
         {
             db = context;
         }
-        public void Create(Category item)
+        public void Create(Genre item)
         {
-            db.Categories.Add(item);
+            db.Genres.Add(item);
         }
 
         public void Delete(int Id)
         {
-            var category = db.Categories.Find(Id);
+            var category = db.Genres.Find(Id);
             if (!ReferenceEquals(category, null))
             {
-                db.Categories.Remove(category);
+                db.Genres.Remove(category);
             }
         }
 
-        public Category Get(int id)
+        public Genre Get(int id)
         {
-            return db.Categories.Where(c=>c.Id==id).FirstOrDefault();
+            return db.Genres.Where(c=>c.Id==id).FirstOrDefault();
         }
 
-        public IEnumerable<Category> GetAll()
+        public IEnumerable<Genre> GetAll()
         {
-            return db.Categories.ToList();
+            return db.Genres.ToList();
         }
 
-        public void Update(Category item)
+        public void Update(Genre item)
         {
             db.Entry(item).State = EntityState.Modified;
         }

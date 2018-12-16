@@ -7,13 +7,13 @@ using BookStore.BLL.DTO;
 
 namespace BookStore.BLL.Interfaces
 {
-    public interface ICategoryService
+    public interface IGenreService
     {
-        IEnumerable<CategoryDTO> GetCategories();
-        CategoryDTO GetGenre(int id);
-        void Update(CategoryDTO categoryDTO);
+        IEnumerable<GenreDTO> GetCategories();
+        GenreDTO GetGenre(int id);
+        void Update(GenreDTO genreDto);
         void DeleteGenre(int id);
-        void CreateGenre(CategoryDTO categoryDTO);
+        void CreateGenre(GenreDTO genreDto);
     }
     
 }

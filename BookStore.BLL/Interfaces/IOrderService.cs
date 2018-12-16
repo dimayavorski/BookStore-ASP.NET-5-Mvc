@@ -10,10 +10,6 @@ namespace BookStore.BLL.Interface
 {
     public interface IOrderService
     {
-       
-        
-
-
         Task AddToCart(BookDTO cartItem,string Id);
         Task<List<CartItemDTO>> GetAllCartItems(string Id);
         void RemoveFromCart(int id, string CartId);
