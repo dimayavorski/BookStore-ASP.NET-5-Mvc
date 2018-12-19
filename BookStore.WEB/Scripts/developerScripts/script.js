@@ -24,3 +24,26 @@ $(document).ready(function () {
     //left nav 
     $("#navbarHidden").hide();
 });
+
+
+$(document).ready(function () {
+    $("#success").removeClass("hidden");
+    $("#success").hide();
+})
+//Show success dialog and then hide
+function OnSuccess() {
+    $('#success').show(1000, function () {
+        setTimeout(function () {
+            $('#success').hide(500);
+        }, 1000);
+    });
+
+}
+//autocomplete for searching input
+$(function () {
+    $("[data-autocomplete-source]").each(function () {
+        var target = $(this);
+        target.autocomplete({ source: target.attr("data-autocomplete-source") });
+
+    });
+});

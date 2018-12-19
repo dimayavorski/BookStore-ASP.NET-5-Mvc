@@ -39,7 +39,7 @@ namespace BookStore.BLL.Services
         public IEnumerable<GenreDTO> GetCategories()
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Genre, GenreDTO>()).CreateMapper();
-            return mapper.Map<IEnumerable<Genre>, List<GenreDTO>>(database.Categories.GetAll());
+            return mapper.Map<IEnumerable<Genre>,IEnumerable<GenreDTO>>(database.Categories.GetAll());
         }
 
         public GenreDTO GetGenre(int id)

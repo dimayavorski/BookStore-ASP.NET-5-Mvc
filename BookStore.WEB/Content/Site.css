@@ -1,11 +1,28 @@
-﻿
-/*Nav*/
+﻿    .field-validation-error {
+        color:red;
+    }
+    .input-validation-error {
+        border: 1px solid #f00;
+        background-color: #fee;
+    }
+        
+    .ui-menu {
+        display: block;
+        float: left;
+        list-style: none outside none;
+        margin: 0;
+        padding: 2px;
+        border-radius: 10px;
+    }
 
+    .ui-menu .ui-menu-item {
+        clear: left;
+        float: left;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
 
-
-
-
-
-
-
-/*Left Menu*/
+    .bookCard {
+        position: relative;
+    }

@@ -135,7 +135,6 @@
     <Compile Include="Repositories\CartRepository.cs" />
     <Compile Include="Repositories\GenreRepository.cs" />
     <Compile Include="Repositories\EfUnitOfWork.cs" />
-    <Compile Include="Repositories\OrderRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

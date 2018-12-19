@@ -80,7 +80,6 @@ namespace BookStore.WEB.Controllers.Admin
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<AuthorViewModel, AuthorDTO>()).CreateMapper();
                 var authorDTO = mapper.Map<AuthorViewModel, AuthorDTO>(viewModel);
                 _authorService.Update(authorDTO);
-                //var authors = _authorService.GetAllAuthors();
                 var mapperAuth = new MapperConfiguration(cfg => cfg.CreateMap<AuthorDTO, AuthorViewModel>()).CreateMapper();
                 var authors =
                     mapperAuth.Map<IEnumerable<AuthorDTO>, List<AuthorViewModel>>(_authorService.GetAllAuthors());

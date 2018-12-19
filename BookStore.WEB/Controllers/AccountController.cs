@@ -30,13 +30,7 @@ namespace BookStore.WEB.Controllers
             OrderService = orderService;
             shoppingCartFactory = factory;
         }
-        //private IUserService UserService
-        //{
-        //    get
-        //    {
-        //        return HttpContext.GetOwinContext().GetUserManager<IUserService>();
-        //    }
-        //}
+    
 
         private IAuthenticationManager AuthenticationManager
         {
@@ -85,6 +79,7 @@ namespace BookStore.WEB.Controllers
         public ActionResult Register()
         {
             return View();
+           
         }
 
         public async Task MigrateShoppingCart(string userName,string CartId)

@@ -33,13 +33,7 @@ namespace BookStore.WEB.Models
                 }
             }
             return context.Session[CartSessionKey].ToString();
-            //var cartId = context.Session[CartSessionKey];
-            //if (cartId == null)
-            //{
-            //    cartId = Guid.NewGuid().ToString();
-            //    context.Session[CartSessionKey] = cartId;
-            //}
-            //return cartId.ToString();
+           
         }
         
     }

@@ -72,7 +72,9 @@ namespace BookStore.WEB.Controllers.Admin
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CategoryViewModel, GenreDTO>()).CreateMapper();
                 var genre = mapper.Map<CategoryViewModel, GenreDTO>(viewModel);
                 _categoryService.Update(genre);
-                var genres = _categoryService.GetCategories();
+                var mapperGenres = new MapperConfiguration(cfg => cfg.CreateMap<GenreDTO, CategoryViewModel>()).CreateMapper();
+                var genres =
+                    mapperGenres.Map<IEnumerable<GenreDTO>, IEnumerable<CategoryViewModel>>(_categoryService.GetCategories());
                 return PartialView("ShowGenres", genres);
 
             }

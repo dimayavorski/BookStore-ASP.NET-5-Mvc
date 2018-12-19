@@ -34,36 +34,7 @@ namespace BookStore.WEB.Controllers
             return View(viewModel);
         }
 
-        //public async Task<ActionResult> ShowCart(string returnUrl)
-        //{
-        //    var cartId = shoppingCartFactory.GetCart(this.HttpContext).ShoppingCartId;
-        //    ShoppingCartViewModel viewModel = new ShoppingCartViewModel
-        //    {
-        //        CartItems = await orderService.GetAllCartItems(cartId),
-        //        returnUrl = returnUrl,
-        //        CartTotal = await orderService.GetTotal(cartId)
-        //    };
-
-        //    return  PartialView(viewModel);
-        //}
-
-        //public async Task<ActionResult> AddToCart(int? id, int? page, string category)
-        //{
-        //    var addedBook = orderService.GetBook(id.Value);
-        //    var cart = shoppingCartFactory.GetCart(this.HttpContext);
-        //    await orderService.AddToCart(addedBook,cart.ShoppingCartId);
-
-        //    return RedirectToAction("Index","Home", new { page = page.Value, category = category });
-        //}
-
-
-
-        //public ActionResult RemoveFromCart(int id, string returnUrl)
-        //{
-        //    var cart = shoppingCartFactory.GetCart(this.HttpContext);
-        //    orderService.RemoveFromCart(id, cart.ShoppingCartId);
-        //    return RedirectToAction("Index", "ShoppingCart", new { returnUrl = returnUrl });
-        //}
+   
         
         public async Task<ActionResult> RemoveFromCart(int id)
         {

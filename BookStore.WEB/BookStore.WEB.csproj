@@ -222,7 +222,6 @@
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\ShoppingCartFactory.cs" />
-    <Compile Include="Models\ShoppingCartRemoveViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\DependencyNinjectModule.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
@@ -239,7 +238,6 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\NavStyles.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -292,8 +290,8 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\developerScripts\CartAjax.js" />
-    <Content Include="Scripts\developerScripts\Scripts.js" />
+    <Content Include="Scripts\developerScripts\EditDialogScript.js" />
+    <Content Include="Scripts\developerScripts\script.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -361,7 +359,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Nav\GetNav.cshtml" />
     <Content Include="Views\Home\BookSummary.cshtml" />
-    <Content Include="Views\ShoppingCart\Added.cshtml" />
     <Content Include="Views\ShoppingCart\ShowCart.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Checkout\MakeOrder.cshtml" />

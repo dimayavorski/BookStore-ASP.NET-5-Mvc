@@ -1,6 +1,7 @@
 ﻿@model BookStore.WEB.ViewModels.MenuViewModel
-    
+  @*Styles for pop-up button*@ 
 <style>
+   
     .default {
         position:fixed;
         top:50%;
@@ -11,6 +12,7 @@
         display: none;
     }
    
+
 </style>  
 <div class="btn-group-vertical btn-group-lg">
     @Html.ActionLink("Главная", "Index", "Home",null,new {@class ="btn btn-primary" })
